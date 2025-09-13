@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/auth";
+import { sendWelcomeEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -40,6 +41,17 @@ export async function POST(request: NextRequest) {
         password: hashedPassword,
       },
     });
+
+    // Send welcome email (don't block registration if email fails)
+    try {
+      await sendWelcomeEmail({
+        to: email,
+        name: name,
+      });
+    } catch (emailError) {
+      console.error("Failed to send welcome email:", emailError);
+      // Continue with successful registration even if email fails
+    }
 
     return NextResponse.json(
       {
