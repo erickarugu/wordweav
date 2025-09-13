@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Copy, Download } from "lucide-react";
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { Loader2, Copy, Download } from 'lucide-react'
 
 export default function TextProcessor() {
   const [inputText, setInputText] = useState("");
@@ -105,10 +105,10 @@ export default function TextProcessor() {
             {formatOptions.map((option) => (
               <div
                 key={option.id}
-                className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                className={`p-4 border rounded-lg cursor-pointer transition-all duration-300 transform hover:-translate-y-1 ${
                   selectedOptions.includes(option.id)
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-orange-500 bg-gradient-to-r from-orange-50 to-amber-50 shadow-lg scale-105"
+                    : "border-orange-200 hover:border-orange-300 hover:bg-orange-50"
                 }`}
                 onClick={() => {
                   setSelectedOptions((prev) =>
@@ -133,7 +133,7 @@ export default function TextProcessor() {
         <Button
           onClick={handleProcess}
           disabled={!inputText.trim() || isProcessing}
-          className="px-8 py-3 text-lg"
+          className="px-8 py-3 text-lg bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
         >
           {isProcessing ? (
             <>
