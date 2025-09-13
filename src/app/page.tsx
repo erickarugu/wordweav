@@ -15,7 +15,9 @@ export default function Home() {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-2 h-2 bg-orange-400 rounded-full opacity-30 animate-float-particle-${i % 3}`}
+            className={`absolute w-2 h-2 bg-orange-400 rounded-full opacity-30 animate-float-particle-${
+              i % 3
+            }`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -32,12 +34,12 @@ export default function Home() {
             {/* Main Title with Gradient Animation */}
             <div className="mb-8 relative">
               <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 relative">
-                <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent animate-gradient-x bg-300% font-extrabold tracking-tight">
+                <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 bg-clip-text text-transparent animate-gradient-x bg-300 font-extrabold tracking-tight">
                   WordWeave
                 </span>
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-lg blur opacity-20 animate-pulse"></div>
               </h1>
-              
+
               {/* Magical Sparkles */}
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4">
                 <div className="flex space-x-2">
@@ -70,7 +72,7 @@ export default function Home() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-600 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 opacity-20 group-hover:opacity-40 blur transition-all duration-300"></div>
               </button>
-              
+
               <button className="px-10 py-5 border-2 border-orange-300 text-orange-700 font-semibold text-xl rounded-full hover:bg-orange-50 transform hover:-translate-y-1 transition-all duration-300 ease-out hover:shadow-lg">
                 Watch Demo
               </button>
@@ -79,9 +81,21 @@ export default function Home() {
             {/* Features Preview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {[
-                { icon: "✨", title: "AI-Powered", desc: "Intelligent text enhancement" },
-                { icon: "⚡", title: "Lightning Fast", desc: "Process text in seconds" },
-                { icon: "🎨", title: "Beautiful Output", desc: "Professional formatting" }
+                {
+                  icon: "✨",
+                  title: "AI-Powered",
+                  desc: "Intelligent text enhancement",
+                },
+                {
+                  icon: "⚡",
+                  title: "Lightning Fast",
+                  desc: "Process text in seconds",
+                },
+                {
+                  icon: "🎨",
+                  title: "Beautiful Output",
+                  desc: "Professional formatting",
+                },
               ].map((feature, i) => (
                 <div
                   key={i}
@@ -91,7 +105,9 @@ export default function Home() {
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-600">{feature.desc}</p>
                 </div>
               ))}
@@ -110,7 +126,7 @@ export default function Home() {
                 Watch your words transform before your eyes
               </p>
             </div>
-            
+
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-orange-200/50 p-8">
               <TextProcessor />
             </div>
