@@ -3,10 +3,13 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
   const [showDropdown, setShowDropdown] = useState(false);
+  const pathname = usePathname();
+  const isDashboard = pathname === "/dashboard";
 
   const handleSignOut = () => {
     signOut({ callbackUrl: "/" });
@@ -28,12 +31,14 @@ export default function Navbar() {
           ) : session ? (
             // Authenticated user menu
             <div className="flex items-center gap-4">
-              <Link
-                href="/dashboard"
-                className="px-4 py-2 text-orange-700 font-medium hover:text-orange-800 transition-colors"
-              >
-                Dashboard
-              </Link>
+              {!isDashboard && (
+                <Link
+                  href="/dashboard"
+                  className="px-4 py-2 text-orange-700 font-medium hover:text-orange-800 transition-colors"
+                >
+                  Dashboard
+                </Link>
+              )}
 
               {/* User Profile Dropdown */}
               <div className="relative">
@@ -76,13 +81,15 @@ export default function Navbar() {
                         {session.user?.email}
                       </p>
                     </div>
-                    <Link
-                      href="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 transition-colors"
-                      onClick={() => setShowDropdown(false)}
-                    >
-                      Dashboard
-                    </Link>
+                    {!isDashboard && (
+                      <Link
+                        href="/dashboard"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 transition-colors"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Dashboard
+                      </Link>
+                    )}
                     <Link
                       href="/profile"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 transition-colors"

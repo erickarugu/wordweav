@@ -342,6 +342,361 @@ export default function LandingPage() {
             </div>
           </section>
 
+          {/* Pricing Section */}
+          <section
+            id="pricing"
+            className="py-20 px-4 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-6">
+                  Simple, Transparent Pricing
+                </h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Choose the perfect plan for your content creation needs. No
+                  hidden fees, cancel anytime.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {/* Individual Plan */}
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl border border-orange-200/50 p-8 hover:bg-white/90 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+                    {/* Plan Header */}
+                    <div className="text-center mb-8">
+                      <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full mb-4">
+                        <span className="text-orange-700 font-medium">
+                          Individual
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                        Perfect for Solo Creators
+                      </h3>
+                      <p className="text-gray-600">
+                        Ideal for writers, bloggers, and content creators
+                      </p>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="text-center mb-8">
+                      <div className="flex items-center justify-center mb-4">
+                        <span className="text-5xl font-bold text-gray-800">
+                          $9.99
+                        </span>
+                        <span className="text-gray-600 ml-2">/month</span>
+                      </div>
+                      <div className="flex items-center justify-center text-gray-600">
+                        <span className="line-through text-gray-400 mr-2">
+                          $119.88
+                        </span>
+                        <span className="font-semibold text-green-600">
+                          $99.90/year
+                        </span>
+                        <span className="ml-2 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
+                          Save 17%
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          15,000 words per month
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          AI detection bypass
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          Multiple writing styles
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Priority support</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          Export in multiple formats
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="text-center">
+                      <button className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                        Start Individual Plan
+                      </button>
+                      <p className="text-sm text-gray-500 mt-2">
+                        7-day free trial • No credit card required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Team Plan */}
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl border border-purple-200/50 p-8 hover:bg-white/90 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+                    {/* Popular Badge */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        Most Popular
+                      </div>
+                    </div>
+
+                    {/* Plan Header */}
+                    <div className="text-center mb-8 pt-4">
+                      <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full mb-4">
+                        <span className="text-purple-700 font-medium">
+                          Team
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                        Perfect for Teams
+                      </h3>
+                      <p className="text-gray-600">
+                        Ideal for agencies, businesses, and content teams
+                      </p>
+                    </div>
+
+                    {/* Pricing */}
+                    <div className="text-center mb-8">
+                      <div className="flex items-center justify-center mb-4">
+                        <span className="text-5xl font-bold text-gray-800">
+                          $4.99
+                        </span>
+                        <span className="text-gray-600 ml-2">/user/month</span>
+                      </div>
+                      <div className="text-gray-600">
+                        <span className="font-semibold">Minimum 3 users</span>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          15,000 words per user per month
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          Team collaboration tools
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Admin dashboard</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          Dedicated account manager
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">
+                          All Individual features
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="text-center">
+                      <button className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                        Start Team Plan
+                      </button>
+                      <p className="text-sm text-gray-500 mt-2">
+                        14-day free trial • No credit card required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* FAQ or Additional Info */}
+              <div className="text-center mt-16">
+                <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-orange-200/50 p-8 max-w-4xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                    Frequently Asked Questions
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-2">
+                        Can I change plans anytime?
+                      </h4>
+                      <p className="text-gray-600 text-sm">
+                        Yes! You can upgrade, downgrade, or cancel your plan at
+                        any time. Changes take effect immediately.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-2">
+                        What happens if I exceed my word limit?
+                      </h4>
+                      <p className="text-gray-600 text-sm">
+                        You can purchase additional words or upgrade to a higher
+                        tier. We'll notify you when you're approaching your
+                        limit.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-2">
+                        Is there a free trial?
+                      </h4>
+                      <p className="text-gray-600 text-sm">
+                        Yes! Individual plans get 7 days free, and Team plans
+                        get 14 days free. No credit card required to start.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800 mb-2">
+                        Do you offer refunds?
+                      </h4>
+                      <p className="text-gray-600 text-sm">
+                        We offer a 30-day money-back guarantee if you're not
+                        completely satisfied with WordWeave.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Demo Section */}
           <section id="demo" className="py-20 px-4">
             <div className="max-w-4xl mx-auto text-center">
