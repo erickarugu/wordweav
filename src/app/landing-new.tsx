@@ -56,46 +56,11 @@ export default function LandingPage() {
           }
         }
 
-        @keyframes bounce {
-          0%,
-          20%,
-          50%,
-          80%,
-          100% {
-            transform: translateY(0);
-          }
-          40% {
-            transform: translateY(-15px);
-          }
-          60% {
-            transform: translateY(-8px);
-          }
-        }
-
-        @keyframes float-gentle {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(0px);
-          }
-          25% {
-            transform: translateY(-5px) translateX(2px);
-          }
-          50% {
-            transform: translateY(-2px) translateX(-1px);
-          }
-          75% {
-            transform: translateY(-8px) translateX(1px);
-          }
-        }
-
         .animate-gradient-x {
           animation: gradient-x 3s ease infinite;
         }
         .animate-sparkle {
           animation: sparkle 2s ease-in-out infinite;
-        }
-        .animate-float-gentle {
-          animation: float-gentle 4s ease-in-out infinite;
         }
         .bg-300 {
           background-size: 300% 300%;
@@ -125,74 +90,43 @@ export default function LandingPage() {
             <div className="max-w-6xl mx-auto text-center">
               {/* Creative WordWeave Animation */}
               <div className="mb-8 relative">
-                <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 relative">
+                <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 relative overflow-hidden">
                   <div className="flex items-center justify-center">
-                    {/* Word with sparkle effect */}
+                    {/* Word */}
                     <span className="relative">
                       {"Word".split("").map((letter, i) => (
                         <span
                           key={i}
-                          className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent font-extrabold tracking-tight transform hover:scale-110 transition-transform duration-300"
+                          className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent font-extrabold tracking-tight animate-bounce"
                           style={{
-                            animation: `bounce 2s ease-in-out infinite`,
                             animationDelay: `${i * 0.1}s`,
+                            animationDuration: "2s",
                           }}
                         >
                           {letter}
                         </span>
                       ))}
-                      {/* Floating sparkles around Word */}
-                      <div className="absolute -top-4 -right-2 w-2 h-2 bg-orange-400 rounded-full animate-ping"></div>
-                      <div
-                        className="absolute -top-6 left-1/2 w-1 h-1 bg-amber-500 rounded-full animate-pulse"
-                        style={{ animationDelay: "0.5s" }}
-                      ></div>
                     </span>
 
-                    {/* Weave with flowing animation and trails */}
+                    {/* Weave with flowing animation */}
                     <span className="relative ml-2">
                       {"Weave".split("").map((letter, i) => (
                         <span
                           key={i}
-                          className="inline-block bg-gradient-to-r from-amber-500 to-yellow-500 bg-clip-text text-transparent font-extrabold tracking-tight relative"
+                          className="inline-block bg-gradient-to-r from-amber-500 to-yellow-500 bg-clip-text text-transparent font-extrabold tracking-tight"
                           style={{
                             animation: `wave 3s ease-in-out infinite`,
                             animationDelay: `${i * 0.2}s`,
                           }}
                         >
                           {letter}
-                          {/* Letter trails */}
-                          {i === 2 && (
-                            <div
-                              className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent opacity-30 animate-pulse"
-                              style={{ animationDelay: "1s" }}
-                            >
-                              {letter}
-                            </div>
-                          )}
                         </span>
                       ))}
-                      {/* Floating elements around Weave */}
-                      <div
-                        className="absolute -bottom-2 left-0 w-1.5 h-1.5 bg-yellow-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "1s" }}
-                      ></div>
-                      <div
-                        className="absolute -top-3 right-1 w-1 h-1 bg-amber-400 rounded-full animate-ping"
-                        style={{ animationDelay: "1.5s" }}
-                      ></div>
                     </span>
                   </div>
 
-                  {/* Subtle glow without box */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-yellow-500/10 blur-3xl animate-pulse"></div>
-
-                  {/* Decorative elements */}
-                  <div className="absolute -top-8 left-1/4 w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-transparent animate-pulse"></div>
-                  <div
-                    className="absolute -bottom-8 right-1/4 w-20 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent animate-pulse"
-                    style={{ animationDelay: "1s" }}
-                  ></div>
+                  {/* Glowing background */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-lg blur opacity-20 animate-pulse"></div>
                 </h1>
 
                 {/* User Count Badge */}
@@ -360,54 +294,12 @@ export default function LandingPage() {
                     <h3 className="text-lg font-semibold text-red-700 mb-4">
                       Original AI Text
                     </h3>
-                    <div className="bg-white rounded-lg p-6 text-left max-h-96 overflow-y-auto">
-                      <p className="text-gray-600 italic text-sm leading-relaxed">
-                        "In the contemporary business ecosystem, organizations
-                        are increasingly leveraging sophisticated technological
-                        infrastructures to optimize operational methodologies
-                        and enhance comprehensive productivity metrics. The
-                        implementation of advanced systematic approaches
-                        facilitates the achievement of superior performance
-                        indicators through strategic utilization of innovative
-                        solutions.
-                        <br />
-                        <br />
-                        Our enterprise-grade platform encompasses a multitude of
-                        functionality paradigms designed to streamline complex
-                        workflow orchestrations while simultaneously maximizing
-                        efficiency coefficients across diverse operational
-                        verticals. Through the deployment of cutting-edge
-                        algorithmic frameworks, stakeholders can anticipate
-                        substantial improvements in key performance indicators
-                        and return on investment metrics.
-                        <br />
-                        <br />
-                        The strategic implementation of our comprehensive
-                        solution architecture enables organizations to
-                        systematically address operational inefficiencies
-                        through data-driven decision-making processes. By
-                        leveraging advanced analytics capabilities and machine
-                        learning algorithms, businesses can optimize resource
-                        allocation mechanisms and enhance overall organizational
-                        performance.
-                        <br />
-                        <br />
-                        Furthermore, our platform facilitates seamless
-                        integration with existing enterprise systems, thereby
-                        ensuring minimal disruption to established operational
-                        protocols while maximizing the potential for
-                        transformative organizational outcomes. The scalable
-                        infrastructure supports enterprise-level deployments
-                        with robust security frameworks and compliance adherence
-                        protocols.
-                        <br />
-                        <br />
-                        Through comprehensive training programs and dedicated
-                        support structures, organizations can ensure optimal
-                        utilization of platform capabilities, resulting in
-                        accelerated time-to-value realization and sustainable
-                        competitive advantages in their respective market
-                        segments."
+                    <div className="bg-white rounded-lg p-4 text-left">
+                      <p className="text-gray-600 italic">
+                        "Utilize our comprehensive solutions to optimize your
+                        business processes and enhance operational efficiency
+                        through strategic implementation of advanced
+                        methodologies."
                       </p>
                     </div>
                   </div>
@@ -417,44 +309,11 @@ export default function LandingPage() {
                     <h3 className="text-lg font-semibold text-green-700 mb-4">
                       Humanized Version
                     </h3>
-                    <div className="bg-white rounded-lg p-6 text-left max-h-96 overflow-y-auto">
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        "Let's be honest – running a business today feels like
-                        juggling flaming torches while riding a unicycle. That's
-                        where we come in. We've built something that actually
-                        makes your work life easier, not more complicated.
-                        <br />
-                        <br />
-                        Think of us as your business's best friend – the one who
-                        always has great advice and actually knows what they're
-                        talking about. Our platform takes all those tedious,
-                        time-consuming tasks that make you want to pull your
-                        hair out and handles them for you. No more drowning in
-                        spreadsheets or staying up late trying to figure out why
-                        your numbers don't add up.
-                        <br />
-                        <br />
-                        What makes us different? We don't just throw fancy tech
-                        at your problems and hope for the best. We actually
-                        listen to what you need and build solutions that work in
-                        the real world. Our tools learn from your business
-                        patterns and get smarter over time, kind of like having
-                        a super-intelligent assistant who never needs coffee
-                        breaks.
-                        <br />
-                        <br />
-                        The best part? Setting everything up won't turn your
-                        office upside down. We know you've got a business to
-                        run, so we make sure everything plays nice with what
-                        you're already using. No drama, no headaches, just
-                        results.
-                        <br />
-                        <br />
-                        And when you need help? We're actually there for you.
-                        Not some chatbot that gives you the runaround, but real
-                        people who know their stuff and genuinely want to see
-                        you succeed. Because when you win, we win – and that's
-                        exactly how we like it."
+                    <div className="bg-white rounded-lg p-4 text-left">
+                      <p className="text-gray-600">
+                        "Let us help you streamline your business and work
+                        smarter, not harder. We'll show you proven strategies
+                        that actually work in the real world."
                       </p>
                     </div>
                   </div>
