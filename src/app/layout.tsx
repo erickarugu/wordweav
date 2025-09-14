@@ -1,22 +1,42 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import { generatePageMetadata, generateStructuredData } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "WordWeave - AI-Powered Writing Assistant",
+export const metadata: Metadata = generatePageMetadata({
+  title: "AI Text Humanizer - Convert AI Content to 100% Human Text",
   description:
-    "Transform your thoughts into captivating narratives with AI-enhanced storytelling",
+    "Transform AI-generated content into natural, human-like text with WordWeave. Our advanced AI humanizer makes AI content undetectable and engaging. Try free today!",
+  keywords: [
+    "AI text humanizer",
+    "AI content humanizer",
+    "make AI text human",
+    "AI to human converter",
+    "humanize AI content",
+    "AI detection remover",
+  ],
+});
+
+export const viewport: Viewport = {
+  themeColor: "#f97316",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
@@ -24,8 +44,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = generateStructuredData("homepage");
+
   return (
     <html lang="en">
+      <head>
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+        {/* Performance optimizations */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* Favicon and icons */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

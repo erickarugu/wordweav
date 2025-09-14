@@ -74,21 +74,24 @@ export default function SignIn() {
         <div className="absolute -bottom-32 left-20 w-80 h-80 bg-gradient-to-r from-orange-400 to-red-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float-slow"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md">
+      <main className="relative z-10 w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-orange-200/50 p-8">
           {/* Header */}
-          <div className="text-center mb-8">
+          <header className="text-center mb-8">
             <Link
               href="/"
               className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent"
             >
               WordWeave
             </Link>
-            <h2 className="text-2xl font-bold text-gray-800 mt-4 mb-2">
-              Welcome Back
-            </h2>
-            <p className="text-gray-600">Sign in to continue your journey</p>
-          </div>
+            <h1 className="text-2xl font-bold text-gray-800 mt-4 mb-2">
+              Sign In to AI Text Humanizer
+            </h1>
+            <p className="text-gray-600">
+              Access your humanization dashboard to transform AI content into
+              natural, human-like text
+            </p>
+          </header>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
@@ -214,7 +217,7 @@ export default function SignIn() {
             </p>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

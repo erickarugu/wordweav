@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import WordWeaveLogo from "@/components/WordWeaveLogo";
 import { CheckCircle, XCircle } from "lucide-react";
 
 export default function LandingPage() {
@@ -312,17 +313,24 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* New Subtitle - Humanizing Text */}
+              {/* SEO-Optimized Subtitle - AI Text Humanization */}
               <div className="mb-12 max-w-4xl mx-auto">
-                <p className="text-2xl md:text-3xl text-gray-700 font-light leading-relaxed mb-6">
+                <h2 className="text-2xl md:text-3xl text-gray-700 font-light leading-relaxed mb-6">
                   Transform{" "}
                   <span className="font-semibold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
-                    robotic AI text
+                    AI-generated text
                   </span>{" "}
                   into{" "}
-                  <span className="font-semibold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
-                    100% human-like content
-                  </span>
+                  <span className="font-semibold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+                    100% human content
+                  </span>{" "}
+                  that passes any AI detection tool
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Our advanced AI humanizer converts robotic AI text into
+                  natural, engaging content that reads like it was written by a
+                  human. Make your AI content undetectable while maintaining
+                  quality and meaning.
                 </p>
 
                 {/* Before/After Example */}
@@ -365,7 +373,7 @@ export default function LandingPage() {
                   href="/auth/signup"
                   className="group bg-gradient-to-r from-orange-600 to-amber-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
                 >
-                  <span>Start Humanizing Text</span>
+                  <span>Start 7-Day Free Trial</span>
                   <span className="group-hover:translate-x-1 transition-transform duration-300">
                     →
                   </span>
@@ -375,7 +383,7 @@ export default function LandingPage() {
                   href="/auth/signin"
                   className="group bg-white/80 backdrop-blur-sm border border-orange-200 text-orange-700 px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-orange-50 transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
                 >
-                  <span>Already have an account?</span>
+                  <span>Sign In to Account</span>
                   <span className="group-hover:translate-x-1 transition-transform duration-300">
                     →
                   </span>
@@ -386,11 +394,11 @@ export default function LandingPage() {
               <div className="flex flex-wrap justify-center items-center gap-8 text-gray-500 text-sm">
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                  <span>No signup required to try</span>
+                  <span>7-day free trial</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                  <span>100% privacy guaranteed</span>
+                  <span>Cancel anytime</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
@@ -461,8 +469,8 @@ export default function LandingPage() {
                   Simple, Transparent Pricing
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Start your 7-day free trial today. No credit card required
-                  until trial ends.
+                  Start your 7-day free trial today. Cancel anytime during your
+                  trial period.
                 </p>
               </div>
 
@@ -652,7 +660,7 @@ export default function LandingPage() {
                             : "Sign In to Start Free Trial"}
                       </button>
                       <p className="text-sm text-gray-500 mt-2">
-                        No credit card required • Cancel anytime
+                        7-day free trial • Cancel anytime
                       </p>
                     </div>
                   </div>
@@ -690,9 +698,9 @@ export default function LandingPage() {
                         Is there a free trial?
                       </h4>
                       <p className="text-gray-600 text-sm">
-                        Yes! Start with a 7-day free trial. No credit card
-                        required. You'll be billed automatically after the trial
-                        period ends.
+                        Yes! Start with a 7-day free trial. Cancel anytime
+                        during your trial period. You'll only be billed if you
+                        continue after the trial ends.
                       </p>
                     </div>
                     <div>
@@ -710,143 +718,243 @@ export default function LandingPage() {
             </div>
           </section>
 
-          {/* Demo Section */}
-          <section id="demo" className="py-20 px-4">
+          {/* Trial CTA Section */}
+          <section id="trial" className="py-20 px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-bold text-gray-800 mb-8">
-                See WordWeave in Action
+                Transform Your AI Content Today
               </h2>
               <p className="text-xl text-gray-600 mb-12">
-                Watch how we transform robotic AI text into engaging, human-like
-                content
+                Join thousands of users who trust WordWeave to make their AI
+                content undetectable
               </p>
 
-              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div className="grid md:grid-cols-2">
-                  {/* Input */}
-                  <div className="p-8 bg-red-50">
-                    <h3 className="text-lg font-semibold text-red-700 mb-4">
-                      Original AI Text
-                    </h3>
-                    <div className="bg-white rounded-lg p-6 text-left max-h-96 overflow-y-auto">
-                      <p className="text-gray-600 italic text-sm leading-relaxed">
-                        "In the contemporary business ecosystem, organizations
-                        are increasingly leveraging sophisticated technological
-                        infrastructures to optimize operational methodologies
-                        and enhance comprehensive productivity metrics. The
-                        implementation of advanced systematic approaches
-                        facilitates the achievement of superior performance
-                        indicators through strategic utilization of innovative
-                        solutions.
-                        <br />
-                        <br />
-                        Our enterprise-grade platform encompasses a multitude of
-                        functionality paradigms designed to streamline complex
-                        workflow orchestrations while simultaneously maximizing
-                        efficiency coefficients across diverse operational
-                        verticals. Through the deployment of cutting-edge
-                        algorithmic frameworks, stakeholders can anticipate
-                        substantial improvements in key performance indicators
-                        and return on investment metrics.
-                        <br />
-                        <br />
-                        The strategic implementation of our comprehensive
-                        solution architecture enables organizations to
-                        systematically address operational inefficiencies
-                        through data-driven decision-making processes. By
-                        leveraging advanced analytics capabilities and machine
-                        learning algorithms, businesses can optimize resource
-                        allocation mechanisms and enhance overall organizational
-                        performance.
-                        <br />
-                        <br />
-                        Furthermore, our platform facilitates seamless
-                        integration with existing enterprise systems, thereby
-                        ensuring minimal disruption to established operational
-                        protocols while maximizing the potential for
-                        transformative organizational outcomes. The scalable
-                        infrastructure supports enterprise-level deployments
-                        with robust security frameworks and compliance adherence
-                        protocols.
-                        <br />
-                        <br />
-                        Through comprehensive training programs and dedicated
-                        support structures, organizations can ensure optimal
-                        utilization of platform capabilities, resulting in
-                        accelerated time-to-value realization and sustainable
-                        competitive advantages in their respective market
-                        segments."
-                      </p>
-                    </div>
-                  </div>
+              <div className="bg-gradient-to-r from-orange-600 to-amber-600 rounded-2xl p-8 text-white text-center">
+                <h3 className="text-3xl font-bold mb-4">
+                  Start Your 7-Day Free Trial
+                </h3>
+                <p className="text-xl mb-8 opacity-90">
+                  Experience the power of advanced AI humanization with full
+                  access to all features
+                </p>
 
-                  {/* Output */}
-                  <div className="p-8 bg-green-50">
-                    <h3 className="text-lg font-semibold text-green-700 mb-4">
-                      Humanized Version
-                    </h3>
-                    <div className="bg-white rounded-lg p-6 text-left max-h-96 overflow-y-auto">
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        "Let's be honest – running a business today feels like
-                        juggling flaming torches while riding a unicycle. That's
-                        where we come in. We've built something that actually
-                        makes your work life easier, not more complicated.
-                        <br />
-                        <br />
-                        Think of us as your business's best friend – the one who
-                        always has great advice and actually knows what they're
-                        talking about. Our platform takes all those tedious,
-                        time-consuming tasks that make you want to pull your
-                        hair out and handles them for you. No more drowning in
-                        spreadsheets or staying up late trying to figure out why
-                        your numbers don't add up.
-                        <br />
-                        <br />
-                        What makes us different? We don't just throw fancy tech
-                        at your problems and hope for the best. We actually
-                        listen to what you need and build solutions that work in
-                        the real world. Our tools learn from your business
-                        patterns and get smarter over time, kind of like having
-                        a super-intelligent assistant who never needs coffee
-                        breaks.
-                        <br />
-                        <br />
-                        The best part? Setting everything up won't turn your
-                        office upside down. We know you've got a business to
-                        run, so we make sure everything plays nice with what
-                        you're already using. No drama, no headaches, just
-                        results.
-                        <br />
-                        <br />
-                        And when you need help? We're actually there for you.
-                        Not some chatbot that gives you the runaround, but real
-                        people who know their stuff and genuinely want to see
-                        you succeed. Because when you win, we win – and that's
-                        exactly how we like it."
-                      </p>
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white/20 rounded-xl p-6">
+                    <div className="text-3xl mb-3">⚡</div>
+                    <h4 className="font-semibold mb-2">Instant Results</h4>
+                    <p className="text-sm opacity-90">
+                      Transform text in seconds
+                    </p>
+                  </div>
+                  <div className="bg-white/20 rounded-xl p-6">
+                    <div className="text-3xl mb-3">🛡️</div>
+                    <h4 className="font-semibold mb-2">99.9% Success Rate</h4>
+                    <p className="text-sm opacity-90">
+                      Bypass all AI detectors
+                    </p>
+                  </div>
+                  <div className="bg-white/20 rounded-xl p-6">
+                    <div className="text-3xl mb-3">💫</div>
+                    <h4 className="font-semibold mb-2">Cancel Anytime</h4>
+                    <p className="text-sm opacity-90">
+                      No long-term commitment
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white/10 rounded-xl p-6 mb-8">
+                  <h4 className="text-lg font-semibold mb-4">
+                    What's Included in Your Trial:
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-4 text-left">
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                      <span>Unlimited text humanization</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                      <span>All AI detection bypass features</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                      <span>Premium support</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
+                      <span>Export & save documents</span>
                     </div>
                   </div>
                 </div>
+
+                <button
+                  onClick={handleStartTrial}
+                  disabled={checkoutLoading}
+                  className="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {checkoutLoading
+                    ? "Starting Trial..."
+                    : "Start 7-Day Free Trial"}
+                </button>
+                <p className="text-sm mt-4 opacity-75">
+                  Trial starts immediately • Cancel anytime during trial period
+                </p>
               </div>
+            </div>
+          </section>
+
+          {/* Blog CTA Section */}
+          <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+            <div className="max-w-6xl mx-auto px-4 text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Learn More About AI Humanization
+              </h2>
+              <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                Discover expert tips, advanced techniques, and the latest
+                insights on making AI content undetectable. Our blog is packed
+                with actionable guides to master AI text humanization.
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-8 mb-12">
+                <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-orange-200 hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-4">📚</div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    Complete Guide
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Master AI text humanization with our comprehensive 2025
+                    guide covering all techniques.
+                  </p>
+                  <Link
+                    href="/blog/complete-guide-ai-text-humanization-2025"
+                    className="text-orange-600 hover:text-orange-700 font-medium"
+                  >
+                    Read Guide →
+                  </Link>
+                </div>
+
+                <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-orange-200 hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-4">🛡️</div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    Bypass Detection
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Learn 10 proven methods to make your AI content undetectable
+                    by any tool.
+                  </p>
+                  <Link
+                    href="/blog/bypass-ai-detection-tools-methods"
+                    className="text-orange-600 hover:text-orange-700 font-medium"
+                  >
+                    Learn Methods →
+                  </Link>
+                </div>
+
+                <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-orange-200 hover:shadow-lg transition-shadow">
+                  <div className="text-3xl mb-4">⚖️</div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    Tool Comparison
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    See how WordWeave compares to other AI humanizers in our
+                    detailed review.
+                  </p>
+                  <Link
+                    href="/blog/best-ai-humanizer-tools-comparison"
+                    className="text-orange-600 hover:text-orange-700 font-medium"
+                  >
+                    See Comparison →
+                  </Link>
+                </div>
+              </div>
+
+              <Link
+                href="/blog"
+                className="inline-block bg-gradient-to-r from-orange-600 to-amber-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg transition-all transform hover:-translate-y-1"
+              >
+                Explore All Articles →
+              </Link>
             </div>
           </section>
 
           {/* Footer */}
           <footer className="bg-gray-900 text-white py-12">
-            <div className="max-w-6xl mx-auto px-4 text-center">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
-                  WordWeave
-                </h3>
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="text-center mb-8">
+                <div className="flex justify-center mb-4">
+                  <WordWeaveLogo width={200} height={60} />
+                </div>
                 <p className="text-gray-400 mt-2">
                   Transform AI text into human-like content
                 </p>
               </div>
 
-              <div className="border-t border-gray-800 pt-8">
+              {/* Footer Navigation */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-md mx-auto">
+                <div>
+                  <h4 className="font-semibold text-white mb-4">Product</h4>
+                  <ul className="space-y-2 text-gray-400">
+                    <li>
+                      <Link
+                        href="/"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        AI Humanizer
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/how-it-works"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        How It Works
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-white mb-4">Resources</h4>
+                  <ul className="space-y-2 text-gray-400">
+                    <li>
+                      <Link
+                        href="/blog"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/blog/complete-guide-ai-text-humanization-2025"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        AI Humanization Guide
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/blog/bypass-ai-detection-tools-methods"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        Bypass AI Detection
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-800 pt-8 text-center">
                 <p className="text-gray-400">
-                  © {new Date().getFullYear()} WordWeave. All rights reserved. Making AI text more
-                  human, one word at a time.
+                  © {new Date().getFullYear()} WordWeave. All rights reserved.
+                  Making AI text more human, one word at a time.
                 </p>
               </div>
             </div>

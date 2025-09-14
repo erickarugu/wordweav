@@ -212,11 +212,11 @@ export default function LandingPage() {
               <div className="flex flex-wrap justify-center items-center gap-8 text-gray-500 text-sm">
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                  <span>No signup required to try</span>
+                  <span>7-day free trial</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                  <span>100% privacy guaranteed</span>
+                  <span>Cancel anytime</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
@@ -336,8 +336,8 @@ export default function LandingPage() {
 
               <div className="border-t border-gray-800 pt-8">
                 <p className="text-gray-400">
-                  © {new Date().getFullYear()} WordWeave. All rights reserved. Making AI text more
-                  human, one word at a time.
+                  © {new Date().getFullYear()} WordWeave. All rights reserved.
+                  Making AI text more human, one word at a time.
                 </p>
               </div>
             </div>
