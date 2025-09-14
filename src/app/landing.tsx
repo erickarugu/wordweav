@@ -1,10 +1,80 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { CheckCircle, XCircle } from "lucide-react";
 
 export default function LandingPage() {
+  const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<"monthly" | "yearly">(
+    "monthly"
+  );
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  useEffect(() => {
+    // Check for payment status in URL params
+    const payment = searchParams.get("payment");
+    if (payment) {
+      setPaymentStatus(payment);
+      // Clear the URL parameter after a delay
+      setTimeout(() => {
+        setPaymentStatus(null);
+        router.replace("/", { scroll: false });
+      }, 5000);
+    }
+  }, [searchParams, router]);
+
+  const handleStartTrial = async () => {
+    // Check if user is authenticated
+    if (!session) {
+      alert("Please sign in to start your free trial");
+      window.location.href = "/auth/signin";
+      return;
+    }
+
+    setCheckoutLoading(true);
+
+    try {
+      console.log("Starting checkout process for plan:", selectedPlan);
+
+      const response = await fetch("/api/payments/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ planType: selectedPlan }),
+      });
+
+      console.log("Checkout response status:", response.status);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Checkout data:", data);
+
+        if (data.checkoutUrl) {
+          console.log("Redirecting to:", data.checkoutUrl);
+          window.location.href = data.checkoutUrl;
+        } else {
+          alert("No checkout URL received");
+        }
+      } else {
+        const error = await response.json();
+        console.error("Checkout error:", error);
+        alert(`Error: ${error.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Error creating checkout:", error);
+      alert("Failed to start checkout process");
+    } finally {
+      setCheckoutLoading(false);
+    }
+  };
   const [userCount, setUserCount] = useState<string>("Loading...");
 
   useEffect(() => {
@@ -120,6 +190,44 @@ export default function LandingPage() {
         <Navbar />
 
         <main className="relative z-10">
+          {/* Payment Status Message */}
+          {paymentStatus && (
+            <div className="max-w-4xl mx-auto px-4 pt-24">
+              <div
+                className={`mb-8 p-4 rounded-lg border ${
+                  paymentStatus === "success"
+                    ? "bg-green-50 border-green-200 text-green-800"
+                    : "bg-red-50 border-red-200 text-red-800"
+                }`}
+              >
+                <div className="flex items-center justify-center">
+                  {paymentStatus === "success" ? (
+                    <CheckCircle className="h-5 w-5 mr-2" />
+                  ) : (
+                    <XCircle className="h-5 w-5 mr-2" />
+                  )}
+                  {paymentStatus === "success" ? (
+                    <div className="text-center">
+                      <h3 className="font-semibold">Payment Successful! 🎉</h3>
+                      <p className="text-sm mt-1">
+                        Welcome to WordWeave! Your subscription is now active
+                        and you should receive a confirmation email shortly.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <h3 className="font-semibold">Payment Cancelled</h3>
+                      <p className="text-sm mt-1">
+                        Your payment was cancelled. Feel free to try again when
+                        you're ready!
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Hero Section */}
           <section className="min-h-screen flex items-center justify-center px-4 pt-20">
             <div className="max-w-6xl mx-auto text-center">
@@ -353,28 +461,63 @@ export default function LandingPage() {
                   Simple, Transparent Pricing
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Choose the perfect plan for your content creation needs. No
-                  hidden fees, cancel anytime.
+                  Start your 7-day free trial today. No credit card required
+                  until trial ends.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {/* Plan Selector */}
+              <div className="flex justify-center mb-12">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 border border-orange-200/50">
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => setSelectedPlan("monthly")}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                        selectedPlan === "monthly"
+                          ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg"
+                          : "text-gray-600 hover:text-gray-800"
+                      }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setSelectedPlan("yearly")}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                        selectedPlan === "yearly"
+                          ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg"
+                          : "text-gray-600 hover:text-gray-800"
+                      }`}
+                    >
+                      Yearly (Save 17%)
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="max-w-md mx-auto">
                 {/* Individual Plan */}
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
                   <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl border border-orange-200/50 p-8 hover:bg-white/90 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
+                    {/* Popular Badge */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-gradient-to-r from-orange-600 to-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        7-Day Free Trial
+                      </div>
+                    </div>
+
                     {/* Plan Header */}
-                    <div className="text-center mb-8">
+                    <div className="text-center mb-8 pt-4">
                       <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full mb-4">
                         <span className="text-orange-700 font-medium">
-                          Individual
+                          Individual Plan
                         </span>
                       </div>
                       <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                        Perfect for Solo Creators
+                        Perfect for Content Creators
                       </h3>
                       <p className="text-gray-600">
-                        Ideal for writers, bloggers, and content creators
+                        Everything you need to transform your writing
                       </p>
                     </div>
 
@@ -382,21 +525,25 @@ export default function LandingPage() {
                     <div className="text-center mb-8">
                       <div className="flex items-center justify-center mb-4">
                         <span className="text-5xl font-bold text-gray-800">
-                          $9.99
+                          ${selectedPlan === "monthly" ? "9.99" : "99.99"}
                         </span>
-                        <span className="text-gray-600 ml-2">/month</span>
-                      </div>
-                      <div className="flex items-center justify-center text-gray-600">
-                        <span className="line-through text-gray-400 mr-2">
-                          $119.88
-                        </span>
-                        <span className="font-semibold text-green-600">
-                          $99.90/year
-                        </span>
-                        <span className="ml-2 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
-                          Save 17%
+                        <span className="text-gray-600 ml-2">
+                          /{selectedPlan === "monthly" ? "month" : "year"}
                         </span>
                       </div>
+                      {selectedPlan === "yearly" && (
+                        <div className="flex items-center justify-center text-gray-600">
+                          <span className="line-through text-gray-400 mr-2">
+                            $119.88
+                          </span>
+                          <span className="font-semibold text-green-600">
+                            $99.99/year
+                          </span>
+                          <span className="ml-2 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
+                            Save 17%
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Features */}
@@ -493,154 +640,19 @@ export default function LandingPage() {
 
                     {/* CTA Button */}
                     <div className="text-center">
-                      <button className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
-                        Start Individual Plan
+                      <button
+                        onClick={handleStartTrial}
+                        disabled={checkoutLoading}
+                        className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                      >
+                        {checkoutLoading
+                          ? "Loading..."
+                          : session
+                            ? "Start 7-Day Free Trial"
+                            : "Sign In to Start Free Trial"}
                       </button>
                       <p className="text-sm text-gray-500 mt-2">
-                        7-day free trial • No credit card required
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Team Plan */}
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl border border-purple-200/50 p-8 hover:bg-white/90 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2">
-                    {/* Popular Badge */}
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                        Most Popular
-                      </div>
-                    </div>
-
-                    {/* Plan Header */}
-                    <div className="text-center mb-8 pt-4">
-                      <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full mb-4">
-                        <span className="text-purple-700 font-medium">
-                          Team
-                        </span>
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                        Perfect for Teams
-                      </h3>
-                      <p className="text-gray-600">
-                        Ideal for agencies, businesses, and content teams
-                      </p>
-                    </div>
-
-                    {/* Pricing */}
-                    <div className="text-center mb-8">
-                      <div className="flex items-center justify-center mb-4">
-                        <span className="text-5xl font-bold text-gray-800">
-                          $4.99
-                        </span>
-                        <span className="text-gray-600 ml-2">/user/month</span>
-                      </div>
-                      <div className="text-gray-600">
-                        <span className="font-semibold">Minimum 3 users</span>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="space-y-4 mb-8">
-                      <div className="flex items-center">
-                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-gray-700">
-                          15,000 words per user per month
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-gray-700">
-                          Team collaboration tools
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-gray-700">Admin dashboard</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-gray-700">
-                          Dedicated account manager
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-gray-700">
-                          All Individual features
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <div className="text-center">
-                      <button className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
-                        Start Team Plan
-                      </button>
-                      <p className="text-sm text-gray-500 mt-2">
-                        14-day free trial • No credit card required
+                        No credit card required • Cancel anytime
                       </p>
                     </div>
                   </div>
@@ -678,8 +690,9 @@ export default function LandingPage() {
                         Is there a free trial?
                       </h4>
                       <p className="text-gray-600 text-sm">
-                        Yes! Individual plans get 7 days free, and Team plans
-                        get 14 days free. No credit card required to start.
+                        Yes! Start with a 7-day free trial. No credit card
+                        required. You'll be billed automatically after the trial
+                        period ends.
                       </p>
                     </div>
                     <div>
@@ -832,7 +845,7 @@ export default function LandingPage() {
 
               <div className="border-t border-gray-800 pt-8">
                 <p className="text-gray-400">
-                  © 2024 WordWeave. All rights reserved. Making AI text more
+                  © {new Date().getFullYear()} WordWeave. All rights reserved. Making AI text more
                   human, one word at a time.
                 </p>
               </div>

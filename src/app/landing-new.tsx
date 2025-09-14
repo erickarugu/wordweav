@@ -336,7 +336,7 @@ export default function LandingPage() {
 
               <div className="border-t border-gray-800 pt-8">
                 <p className="text-gray-400">
-                  © 2024 WordWeave. All rights reserved. Making AI text more
+                  © {new Date().getFullYear()} WordWeave. All rights reserved. Making AI text more
                   human, one word at a time.
                 </p>
               </div>

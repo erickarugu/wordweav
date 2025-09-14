@@ -40,20 +40,52 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String       @unique
-  emailVerified DateTime?    @map("email_verified")
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
-  createdAt     DateTime     @default(now()) @map("created_at")
-  updatedAt     DateTime     @updatedAt @map("updated_at")
-  accounts      Account[]
-  sessions      Session[]
-  documents     Document[]
-  usageStats    UsageStats[]
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  // Subscription fields
+  subscriptionId        String?   @map("subscription_id") // Lemon Squeezy subscription ID
+  subscriptionStatus    String?   @map("subscription_status") // active, inactive, cancelled, etc.
+  planType              String?   @map("plan_type") // monthly, yearly
+  subscriptionStartDate DateTime? @map("subscription_start_date")
+  subscriptionEndDate   DateTime? @map("subscription_end_date")
+  trialStartDate        DateTime? @map("trial_start_date")
+  trialEndDate          DateTime? @map("trial_end_date")
+  isOnTrial             Boolean   @default(false) @map("is_on_trial")
+  customerId            String?   @map("customer_id") // Lemon Squeezy customer ID
+
+  accounts   Account[]
+  sessions   Session[]
+  documents  Document[]
+  usageStats UsageStats[]
+  payments   Payment[]
 
   @@map("users")
+}
+
+model Payment {
+  id             String   @id @default(cuid())
+  userId         String   @map("user_id")
+  paymentId      String   @unique @map("payment_id") // Lemon Squeezy payment ID
+  subscriptionId String?  @map("subscription_id") // Lemon Squeezy subscription ID
+  amount         Int // Amount in cents
+  currency       String   @default("usd")
+  status         String // succeeded, failed, pending, refunded
+  description    String?
+  invoiceUrl     String?  @map("invoice_url")
+  paymentDate    DateTime @map("payment_date")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
 }
 
 model Document {

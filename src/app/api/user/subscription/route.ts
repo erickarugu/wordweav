@@ -18,30 +18,71 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Mock subscription data - in a real app, this would come from Stripe or another payment provider
+    // Get subscription data from user record
     const subscription = {
-      id: "sub_mock_123",
-      plan: "individual" as const,
-      status: "active" as const,
-      currentPeriodStart: new Date(
-        Date.now() - 15 * 24 * 60 * 60 * 1000
-      ).toISOString(), // 15 days ago
-      currentPeriodEnd: new Date(
-        Date.now() + 15 * 24 * 60 * 60 * 1000
-      ).toISOString(), // 15 days from now
-      cancelAtPeriodEnd: false,
-      priceId: "price_individual_monthly",
-      quantity: 1,
+      id: user.subscriptionId,
+      plan: user.planType || "individual",
+      status: user.subscriptionStatus || "inactive",
+      currentPeriodStart: user.subscriptionStartDate?.toISOString(),
+      currentPeriodEnd: user.subscriptionEndDate?.toISOString(),
+      cancelAtPeriodEnd: user.subscriptionStatus === "cancelled",
+      isOnTrial: user.isOnTrial,
+      trialStartDate: user.trialStartDate?.toISOString(),
+      trialEndDate: user.trialEndDate?.toISOString(),
+      customerId: user.customerId,
     };
 
-    // Mock usage stats - in a real app, this would come from your usage tracking system
+    // Get usage stats from current month
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
+
+    const usageStats = await prisma.usageStats.findFirst({
+      where: {
+        userId: user.id,
+        month: currentMonth,
+        year: currentYear,
+      },
+    });
+
+    // Also get direct word count from documents this month for accuracy
+    const startOfMonth = new Date(currentYear, currentMonth - 1, 1);
+    const endOfMonth = new Date(currentYear, currentMonth, 0, 23, 59, 59, 999);
+
+    const documentsThisMonth = await prisma.document.findMany({
+      where: {
+        userId: user.id,
+        createdAt: {
+          gte: startOfMonth,
+          lte: endOfMonth,
+        },
+      },
+      select: {
+        wordCount: true,
+        createdAt: true,
+      },
+    });
+
+    // Calculate accurate word count and get most recent usage date
+    const actualWordsUsed = documentsThisMonth.reduce(
+      (total, doc) => total + doc.wordCount,
+      0
+    );
+    const mostRecentDocument =
+      documentsThisMonth.length > 0
+        ? documentsThisMonth.sort(
+            (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+          )[0]
+        : null;
+
     const usage = {
-      wordsUsedThisMonth: Math.floor(Math.random() * 12000) + 1000, // Random between 1000-13000
-      wordsLimit: 15000,
-      documentsProcessed: Math.floor(Math.random() * 50) + 5, // Random between 5-55
-      lastUsed: new Date(
-        Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000
-      ).toISOString(), // Random within last 7 days
+      wordsUsedThisMonth: actualWordsUsed,
+      wordsLimit: 15000, // Standard limit for individual plan
+      documentsProcessed: documentsThisMonth.length,
+      lastUsed:
+        mostRecentDocument?.createdAt?.toISOString() ||
+        usageStats?.updatedAt?.toISOString(),
+      timeSaved: usageStats?.timeSaved || 0,
     };
 
     return NextResponse.json({
@@ -51,7 +92,7 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching subscription:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Failed to fetch subscription data" },
       { status: 500 }
     );
   }

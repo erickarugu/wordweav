@@ -16,14 +16,16 @@ interface UserProfile {
 }
 
 interface Subscription {
-  id: string;
-  plan: "individual" | "team";
-  status: "active" | "canceled" | "past_due";
-  currentPeriodStart: string;
-  currentPeriodEnd: string;
+  id: string | null;
+  plan: "monthly" | "yearly" | "individual" | "team";
+  status: "active" | "canceled" | "cancelled" | "past_due" | "inactive";
+  currentPeriodStart: string | null;
+  currentPeriodEnd: string | null;
   cancelAtPeriodEnd: boolean;
-  priceId: string;
-  quantity?: number;
+  isOnTrial: boolean;
+  trialStartDate?: string;
+  trialEndDate?: string;
+  customerId?: string;
 }
 
 interface PaymentHistory {
@@ -440,28 +442,57 @@ export default function ProfilePage() {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-8">
                   Current Plan
                 </h2>
-                {subscription ? (
+                {subscription && subscription.status !== "inactive" ? (
                   <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-6 border border-orange-200">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-semibold capitalize text-gray-800">
-                          {subscription.plan} Plan
+                        <h3 className="text-xl font-semibold text-gray-800">
+                          {subscription.plan === "yearly"
+                            ? "Individual Plan (Annual)"
+                            : "Individual Plan (Monthly)"}
                         </h3>
-                        <p className="text-gray-600 capitalize">
-                          Status: {subscription.status}
-                        </p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="text-gray-600">Status:</span>
+                          <span
+                            className={`px-3 py-1 rounded-full text-sm font-medium ${
+                              subscription.status === "active"
+                                ? "bg-green-100 text-green-800"
+                                : subscription.isOnTrial
+                                  ? "bg-orange-100 text-orange-800"
+                                  : subscription.status === "cancelled" ||
+                                      subscription.status === "canceled"
+                                    ? "bg-red-100 text-red-800"
+                                    : "bg-gray-100 text-gray-800"
+                            }`}
+                          >
+                            {subscription.isOnTrial
+                              ? "On Trial"
+                              : subscription.status === "active"
+                                ? "Active"
+                                : subscription.status.charAt(0).toUpperCase() +
+                                  subscription.status
+                                    .slice(1)
+                                    .replace("_", " ")}
+                          </span>
+                        </div>
+                        {subscription.isOnTrial &&
+                          subscription.trialEndDate && (
+                            <p className="text-sm text-orange-600 mt-2 font-medium">
+                              Trial ends:{" "}
+                              {formatDate(subscription.trialEndDate)}
+                            </p>
+                          )}
                       </div>
                       <div className="text-right">
                         <div className="text-2xl font-bold text-orange-600">
-                          $
-                          {subscription.plan === "individual" ? "9.99" : "4.99"}
+                          ${subscription.plan === "yearly" ? "99.99" : "9.99"}
                           <span className="text-sm text-gray-600">
-                            /{subscription.plan === "team" ? "user/" : ""}month
+                            /{subscription.plan === "yearly" ? "year" : "month"}
                           </span>
                         </div>
-                        {subscription.quantity && subscription.quantity > 1 && (
-                          <p className="text-sm text-gray-600">
-                            {subscription.quantity} users
+                        {subscription.isOnTrial && (
+                          <p className="text-sm text-orange-600 font-medium">
+                            7-day free trial
                           </p>
                         )}
                       </div>
@@ -471,8 +502,13 @@ export default function ProfilePage() {
                       <div>
                         <span className="text-gray-600">Current period:</span>
                         <span className="ml-2">
-                          {formatDate(subscription.currentPeriodStart)} -{" "}
-                          {formatDate(subscription.currentPeriodEnd)}
+                          {subscription.currentPeriodStart
+                            ? formatDate(subscription.currentPeriodStart)
+                            : "N/A"}{" "}
+                          -{" "}
+                          {subscription.currentPeriodEnd
+                            ? formatDate(subscription.currentPeriodEnd)
+                            : "N/A"}
                         </span>
                       </div>
                       <div>
@@ -509,9 +545,15 @@ export default function ProfilePage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center py-12">
-                    <div className="text-gray-500 mb-4">
-                      No active subscription
+                  <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-8 border border-gray-200 text-center">
+                    <div className="mb-6">
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                        No Active Plan
+                      </h3>
+                      <p className="text-gray-600">
+                        You don't have an active subscription. Choose a plan to
+                        get started.
+                      </p>
                     </div>
                     <button
                       onClick={() => router.push("/#pricing")}
@@ -561,9 +603,16 @@ export default function ProfilePage() {
                       </div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600">
+                      <div className="text-2xl font-bold text-gray-800">
                         {usageStats.lastUsed
-                          ? formatDate(usageStats.lastUsed)
+                          ? new Date(usageStats.lastUsed).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )
                           : "Never"}
                       </div>
                       <div className="text-sm text-gray-600">Last Used</div>
@@ -604,8 +653,8 @@ export default function ProfilePage() {
                               payment.status === "succeeded"
                                 ? "text-green-600"
                                 : payment.status === "failed"
-                                ? "text-red-600"
-                                : "text-yellow-600"
+                                  ? "text-red-600"
+                                  : "text-yellow-600"
                             }`}
                           >
                             {payment.status.charAt(0).toUpperCase() +

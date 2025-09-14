@@ -18,39 +18,29 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Mock payment history - in a real app, this would come from Stripe or another payment provider
-    const payments = [
-      {
-        id: "pi_mock_001",
-        amount: 999, // $9.99 in cents
-        currency: "usd",
-        status: "succeeded" as const,
-        date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
-        description: "WordWeave Individual Plan - Monthly",
-        invoiceUrl: "https://example.com/invoice/001",
+    // Fetch real payment history from database
+    const payments = await prisma.payment.findMany({
+      where: {
+        userId: user.id,
       },
-      {
-        id: "pi_mock_002",
-        amount: 999,
-        currency: "usd",
-        status: "succeeded" as const,
-        date: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days ago
-        description: "WordWeave Individual Plan - Monthly",
-        invoiceUrl: "https://example.com/invoice/002",
+      orderBy: {
+        paymentDate: "desc",
       },
-      {
-        id: "pi_mock_003",
-        amount: 999,
-        currency: "usd",
-        status: "succeeded" as const,
-        date: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(), // 90 days ago
-        description: "WordWeave Individual Plan - Monthly",
-        invoiceUrl: "https://example.com/invoice/003",
-      },
-    ];
+    });
+
+    // Format payments for display
+    const formattedPayments = payments.map((payment) => ({
+      id: payment.paymentId,
+      amount: payment.amount,
+      currency: payment.currency,
+      status: payment.status,
+      date: payment.paymentDate.toISOString(),
+      description: payment.description || "Subscription payment",
+      invoiceUrl: payment.invoiceUrl,
+    }));
 
     return NextResponse.json({
-      payments,
+      payments: formattedPayments,
     });
   } catch (error) {
     console.error("Error fetching payments:", error);

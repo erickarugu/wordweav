@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import TextProcessor from "@/components/TextProcessor";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,12 +14,16 @@ import {
   Calendar,
   BarChart3,
   ArrowRight,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import { formatProcessingTime, formatDocumentTitle } from "@/utils/helpers";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
   const [stats, setStats] = useState({
     documentsProcessed: 0,
     wordsEnhanced: 0,
@@ -40,6 +44,19 @@ export default function Dashboard() {
       router.push("/auth/signin");
     }
   }, [status, router]);
+
+  useEffect(() => {
+    // Check for payment status in URL params
+    const payment = searchParams.get("payment");
+    if (payment) {
+      setPaymentStatus(payment);
+      // Clear the URL parameter after a delay
+      setTimeout(() => {
+        setPaymentStatus(null);
+        router.replace("/dashboard", { scroll: false });
+      }, 5000);
+    }
+  }, [searchParams, router]);
 
   useEffect(() => {
     if (session?.user?.id) {
@@ -172,6 +189,42 @@ export default function Dashboard() {
 
         {/* Content */}
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
+          {/* Payment Status Message */}
+          {paymentStatus && (
+            <div
+              className={`mb-8 p-4 rounded-lg border ${
+                paymentStatus === "success"
+                  ? "bg-green-50 border-green-200 text-green-800"
+                  : "bg-red-50 border-red-200 text-red-800"
+              }`}
+            >
+              <div className="flex items-center">
+                {paymentStatus === "success" ? (
+                  <CheckCircle className="h-5 w-5 mr-2" />
+                ) : (
+                  <XCircle className="h-5 w-5 mr-2" />
+                )}
+                {paymentStatus === "success" ? (
+                  <div>
+                    <h3 className="font-semibold">Payment Successful! 🎉</h3>
+                    <p className="text-sm mt-1">
+                      Welcome to WordWeave! Your subscription is now active and
+                      you should receive a confirmation email shortly.
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <h3 className="font-semibold">Payment Cancelled</h3>
+                    <p className="text-sm mt-1">
+                      Your payment was cancelled. You can try again anytime from
+                      our pricing page.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
@@ -240,8 +293,8 @@ export default function Dashboard() {
                       {loading
                         ? "..."
                         : stats.timeSaved >= 60
-                        ? `${Math.round(stats.timeSaved / 60)}h`
-                        : `${stats.timeSaved}m`}
+                          ? `${Math.round(stats.timeSaved / 60)}h`
+                          : `${stats.timeSaved}m`}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
                       +
