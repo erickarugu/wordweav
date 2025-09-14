@@ -126,7 +126,7 @@ export async function sendResetPasswordEmail({
     const fromEmail =
       process.env.NODE_ENV === "production"
         ? "WordWeave <security@wordweave.app>"
-        : "WordWeave <onboarding@resend.dev>";
+        : "Acme <onboarding@resend.dev>";
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,

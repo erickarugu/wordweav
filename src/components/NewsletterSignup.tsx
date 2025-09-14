@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Toast from './Toast';
+import { useState } from "react";
+import Toast from "./Toast";
 
 export default function NewsletterSignup() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState<'success' | 'error'>('success');
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error">("success");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!email || !email.includes('@')) {
-      setToastMessage('Please enter a valid email address');
-      setToastType('error');
+
+    if (!email || !email.includes("@")) {
+      setToastMessage("Please enter a valid email address");
+      setToastType("error");
       setShowToast(true);
       return;
     }
@@ -23,10 +23,10 @@ export default function NewsletterSignup() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
+      const response = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
@@ -34,16 +34,16 @@ export default function NewsletterSignup() {
       const data = await response.json();
 
       if (response.ok) {
-        setEmail('');
-        setToastMessage('Successfully subscribed to our newsletter!');
-        setToastType('success');
+        setEmail("");
+        setToastMessage("Successfully subscribed to our newsletter!");
+        setToastType("success");
       } else {
-        setToastMessage(data.error || 'Failed to subscribe. Please try again.');
-        setToastType('error');
+        setToastMessage(data.error || "Failed to subscribe. Please try again.");
+        setToastType("error");
       }
     } catch (error) {
-      setToastMessage('Something went wrong. Please try again.');
-      setToastType('error');
+      setToastMessage("Something went wrong. Please try again.");
+      setToastType("error");
     } finally {
       setLoading(false);
       setShowToast(true);
@@ -59,7 +59,7 @@ export default function NewsletterSignup() {
               Join 1000+ subscribers
             </span>
           </div>
-          
+
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
             Stay Updated on AI Humanization
           </h2>
@@ -69,7 +69,10 @@ export default function NewsletterSignup() {
             undetectable and improve your writing quality.
           </p>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+          >
             <input
               type="email"
               value={email}
@@ -79,12 +82,12 @@ export default function NewsletterSignup() {
               disabled={loading}
               className="flex-1 px-4 py-3 rounded-lg border border-orange-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
             />
-            <button 
+            <button
               type="submit"
               disabled={loading}
               className="bg-gradient-to-r from-orange-600 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed min-w-[120px]"
             >
-              {loading ? 'Subscribing...' : 'Subscribe'}
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </form>
 

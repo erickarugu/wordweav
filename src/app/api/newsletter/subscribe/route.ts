@@ -1,23 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
 
     // Validate email
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      );
+    if (!email || typeof email !== "string") {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Please enter a valid email address' },
+        { error: "Please enter a valid email address" },
         { status: 400 }
       );
     }
@@ -29,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     if (existingSubscriber) {
       return NextResponse.json(
-        { error: 'This email is already subscribed to our newsletter' },
+        { error: "This email is already subscribed to our newsletter" },
         { status: 409 }
       );
     }
@@ -47,17 +44,16 @@ export async function POST(request: NextRequest) {
     // For example, send a welcome email or add to your email marketing platform
 
     return NextResponse.json(
-      { 
-        message: 'Successfully subscribed to newsletter',
-        subscriberId: subscriber.id 
+      {
+        message: "Successfully subscribed to newsletter",
+        subscriberId: subscriber.id,
       },
       { status: 201 }
     );
-
   } catch (error) {
-    console.error('Newsletter subscription error:', error);
+    console.error("Newsletter subscription error:", error);
     return NextResponse.json(
-      { error: 'Internal server error. Please try again later.' },
+      { error: "Internal server error. Please try again later." },
       { status: 500 }
     );
   }

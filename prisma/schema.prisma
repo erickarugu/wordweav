@@ -148,12 +148,23 @@ model VerificationToken {
 }
 
 model NewsletterSubscriber {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  subscribedAt DateTime @default(now()) @map("subscribed_at")
-  isActive     Boolean  @default(true) @map("is_active")
+  id             String    @id @default(cuid())
+  email          String    @unique
+  subscribedAt   DateTime  @default(now()) @map("subscribed_at")
+  isActive       Boolean   @default(true) @map("is_active")
   unsubscribedAt DateTime? @map("unsubscribed_at")
-  source       String?  // Track where they subscribed from (blog, homepage, etc.)
+  source         String? // Track where they subscribed from (blog, homepage, etc.)
 
   @@map("newsletter_subscribers")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  used      Boolean  @default(false)
+
+  @@map("password_reset_tokens")
 }

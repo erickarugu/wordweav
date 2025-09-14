@@ -1,16 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
 
     // Validate email
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      );
+    if (!email || typeof email !== "string") {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     // Find subscriber
@@ -20,14 +17,14 @@ export async function POST(request: NextRequest) {
 
     if (!subscriber) {
       return NextResponse.json(
-        { error: 'Email not found in our subscriber list' },
+        { error: "Email not found in our subscriber list" },
         { status: 404 }
       );
     }
 
     if (!subscriber.isActive) {
       return NextResponse.json(
-        { error: 'Email is already unsubscribed' },
+        { error: "Email is already unsubscribed" },
         { status: 409 }
       );
     }
@@ -42,14 +39,13 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { message: 'Successfully unsubscribed from newsletter' },
+      { message: "Successfully unsubscribed from newsletter" },
       { status: 200 }
     );
-
   } catch (error) {
-    console.error('Newsletter unsubscription error:', error);
+    console.error("Newsletter unsubscription error:", error);
     return NextResponse.json(
-      { error: 'Internal server error. Please try again later.' },
+      { error: "Internal server error. Please try again later." },
       { status: 500 }
     );
   }

@@ -71,6 +71,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/auth/signin",
+    error: "/auth/error", // Custom error page
   },
   debug: process.env.NODE_ENV === "development",
   logger: {
@@ -85,6 +86,70 @@ const handler = NextAuth({
     },
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          // Check if a user with this email already exists
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email! },
+            include: { accounts: true },
+          });
+
+          if (existingUser) {
+            // Check if this Google account is already linked
+            const existingGoogleAccount = existingUser.accounts.find(
+              (acc) =>
+                acc.provider === "google" &&
+                acc.providerAccountId === account.providerAccountId
+            );
+
+            if (!existingGoogleAccount) {
+              // Link the Google account to the existing user
+              await prisma.account.create({
+                data: {
+                  userId: existingUser.id,
+                  type: account.type,
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                  refresh_token: account.refresh_token,
+                  access_token: account.access_token,
+                  expires_at: account.expires_at,
+                  token_type: account.token_type,
+                  scope: account.scope,
+                  id_token: account.id_token,
+                  session_state: account.session_state,
+                },
+              });
+
+              // Update user with Google profile info if missing
+              const googleProfile = profile as {
+                picture?: string;
+                name?: string;
+              }; // Cast to access Google-specific fields
+              if (!existingUser.image && googleProfile?.picture) {
+                await prisma.user.update({
+                  where: { id: existingUser.id },
+                  data: {
+                    image: googleProfile.picture,
+                    name: existingUser.name || googleProfile?.name,
+                  },
+                });
+              }
+            }
+
+            // Set the user ID to the existing user's ID for proper session creation
+            user.id = existingUser.id;
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Error during Google sign-in:", error);
+          return false;
+        }
+      }
+
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
