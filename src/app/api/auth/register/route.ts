@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/auth";
 import { sendWelcomeEmail } from "@/lib/email";
+import { withSecurity } from "@/lib/security";
 
-export async function POST(request: NextRequest) {
+// Registration handler
+async function registerHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const { name, email, password } = await request.json();
 
@@ -68,3 +70,10 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware with auth rate limiting (5 requests per 15 minutes)
+export const POST = withSecurity(registerHandler, {
+  csrf: { enabled: false }, // Disable CSRF for registration
+  authentication: { required: false },
+  rateLimit: { enabled: true, limiter: "auth" },
+});

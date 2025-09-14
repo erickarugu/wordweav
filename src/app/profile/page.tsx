@@ -88,7 +88,7 @@ export default function ProfilePage() {
       setLoading(true);
       loadProfileData().finally(() => setLoading(false));
     }
-  }, [session?.user?.email, saving]); // Don't reload when saving
+  }, [session?.user?.email, profile, saving]); // Don't reload when saving
 
   const loadProfileData = async () => {
     try {
@@ -183,6 +183,7 @@ export default function ProfilePage() {
         showToast(error.message || "Failed to update profile", "error");
       }
     } catch (error) {
+      console.error("Profile update error:", error);
       showToast("An error occurred while updating your profile", "error");
     } finally {
       setSaving(false);
@@ -216,6 +217,7 @@ export default function ProfilePage() {
         );
       }
     } catch (error) {
+      console.error("Subscription cancellation error:", error);
       showToast("An error occurred while canceling your subscription", "error");
     }
   };

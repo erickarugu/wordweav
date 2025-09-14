@@ -35,7 +35,7 @@ jest.mock("next-auth/react", () => ({
 global.fetch = jest.fn();
 
 // Mock window.matchMedia for responsive components (only in jsdom environment)
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: jest.fn().mockImplementation((query) => ({

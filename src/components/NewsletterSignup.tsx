@@ -42,6 +42,7 @@ export default function NewsletterSignup() {
         setToastType("error");
       }
     } catch (error) {
+      console.error("Newsletter subscription error:", error);
       setToastMessage("Something went wrong. Please try again.");
       setToastType("error");
     } finally {

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { securityMiddleware } from "@/lib/security";
 
-export async function POST(request: NextRequest) {
+// Newsletter unsubscribe handler
+async function unsubscribeHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const { email } = await request.json();
 
@@ -50,3 +52,6 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware with public rate limiting (100 requests per minute)
+export const POST = securityMiddleware.public(unsubscribeHandler);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -8,8 +8,8 @@ import Navbar from "@/components/Navbar";
 import WordWeaveLogo from "@/components/WordWeaveLogo";
 import { CheckCircle, XCircle } from "lucide-react";
 
-export default function LandingPage() {
-  const { data: session, status } = useSession();
+function LandingPageContent() {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
@@ -962,5 +962,13 @@ export default function LandingPage() {
         </main>
       </div>
     </>
+  );
+}
+
+export default function LandingPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LandingPageContent />
+    </Suspense>
   );
 }

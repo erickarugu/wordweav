@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { LEMON_SQUEEZY_CONFIG, TRIAL_DAYS } from "@/lib/lemonsqueezy";
 import { prisma } from "@/lib/prisma";
+import { withSecurity } from "@/lib/security";
 
-export async function POST(request: NextRequest) {
+// Payment checkout handler
+async function checkoutHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -181,3 +183,10 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware with payment rate limiting (10 requests per minute)
+export const POST = withSecurity(checkoutHandler, {
+  csrf: { enabled: true },
+  authentication: { required: true },
+  rateLimit: { enabled: true, limiter: "payment" },
+});

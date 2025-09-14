@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hashPassword } from "@/lib/auth";
+import { withSecurity } from "@/lib/security";
 
-export async function POST(request: NextRequest) {
+// Reset password handler
+async function resetPasswordHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const { token, password } = await request.json();
 
@@ -93,3 +95,10 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware with auth rate limiting (5 requests per 15 minutes)
+export const POST = withSecurity(resetPasswordHandler, {
+  csrf: { enabled: false }, // Disable CSRF for password reset
+  authentication: { required: false },
+  rateLimit: { enabled: true, limiter: "auth" },
+});

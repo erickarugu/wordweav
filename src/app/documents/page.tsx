@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -47,6 +47,50 @@ export default function DocumentsPage() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchDocuments = useCallback(
+    async (pageNum: number, reset = false) => {
+      try {
+        if (pageNum === 1) {
+          setLoading(true);
+        } else {
+          setLoadingMore(true);
+        }
+
+        const response = await fetch(
+          `/api/text/documents?page=${pageNum}&limit=10`
+        );
+        if (response.ok) {
+          const data = await response.json();
+
+          if (reset) {
+            setDocuments(data.documents || []);
+          } else {
+            setDocuments((prev) => [...prev, ...(data.documents || [])]);
+          }
+
+          // Check if there are more pages
+          const totalPages = data.pagination?.totalPages || 1;
+          setHasMore(pageNum < totalPages);
+
+          // Group documents by date
+          const allDocs = reset
+            ? data.documents || []
+            : [...documents, ...(data.documents || [])];
+          groupDocumentsByDate(allDocs);
+        } else {
+          setError("Failed to load documents");
+        }
+      } catch (error) {
+        console.error("Error fetching documents:", error);
+        setError("Failed to load documents");
+      } finally {
+        setLoading(false);
+        setLoadingMore(false);
+      }
+    },
+    [documents]
+  );
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth/signin");
@@ -56,48 +100,7 @@ export default function DocumentsPage() {
     if (status === "authenticated" && session?.user?.id) {
       fetchDocuments(1, true);
     }
-  }, [status, session]);
-
-  const fetchDocuments = async (pageNum: number, reset = false) => {
-    try {
-      if (pageNum === 1) {
-        setLoading(true);
-      } else {
-        setLoadingMore(true);
-      }
-
-      const response = await fetch(
-        `/api/text/documents?page=${pageNum}&limit=10`
-      );
-      if (response.ok) {
-        const data = await response.json();
-
-        if (reset) {
-          setDocuments(data.documents || []);
-        } else {
-          setDocuments((prev) => [...prev, ...(data.documents || [])]);
-        }
-
-        // Check if there are more pages
-        const totalPages = data.pagination?.totalPages || 1;
-        setHasMore(pageNum < totalPages);
-
-        // Group documents by date
-        const allDocs = reset
-          ? data.documents || []
-          : [...documents, ...(data.documents || [])];
-        groupDocumentsByDate(allDocs);
-      } else {
-        setError("Failed to load documents");
-      }
-    } catch (error) {
-      console.error("Error fetching documents:", error);
-      setError("Failed to load documents");
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
-    }
-  };
+  }, [status, session, fetchDocuments, router]);
 
   const groupDocumentsByDate = (docs: DocumentData[]) => {
     const grouped = docs.reduce((acc: GroupedDocuments, doc) => {
@@ -118,7 +121,7 @@ export default function DocumentsPage() {
       setPage(nextPage);
       fetchDocuments(nextPage);
     }
-  }, [page, loadingMore, hasMore]);
+  }, [page, loadingMore, hasMore, fetchDocuments]);
 
   // Infinite scroll detection
   useEffect(() => {

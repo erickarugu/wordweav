@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
@@ -17,9 +17,9 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
-import { formatProcessingTime, formatDocumentTitle } from "@/utils/helpers";
+import { formatDocumentTitle } from "@/utils/helpers";
 
-export default function Dashboard() {
+function DashboardContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -77,13 +77,14 @@ export default function Dashboard() {
         const totalDocs = data.documents?.length || 0;
         const totalWords =
           data.documents?.reduce(
-            (sum: number, doc: any) =>
+            (sum: number, doc: { analytics?: { wordsProcessed?: number } }) =>
               sum + (doc.analytics?.wordsProcessed || 0),
             0
           ) || 0;
-        const totalTime =
+        const totalTimeSaved =
           data.documents?.reduce(
-            (sum: number, doc: any) => sum + (doc.analytics?.timeSaved || 0),
+            (sum: number, doc: { analytics?: { timeSaved?: number } }) =>
+              sum + (doc.analytics?.timeSaved || 0),
             0
           ) || 0;
 
@@ -91,7 +92,7 @@ export default function Dashboard() {
         const currentMonth = new Date().getMonth();
         const currentYear = new Date().getFullYear();
         const thisMonthDocs =
-          data.documents?.filter((doc: any) => {
+          data.documents?.filter((doc: { createdAt: string }) => {
             const docDate = new Date(doc.createdAt);
             return (
               docDate.getMonth() === currentMonth &&
@@ -100,21 +101,24 @@ export default function Dashboard() {
           }) || [];
 
         const thisMonthWords = thisMonthDocs.reduce(
-          (sum: number, doc: any) => sum + (doc.analytics?.wordsProcessed || 0),
+          (sum: number, doc: { analytics?: { wordsProcessed?: number } }) =>
+            sum + (doc.analytics?.wordsProcessed || 0),
           0
         );
         const thisMonthTime = thisMonthDocs.reduce(
-          (sum: number, doc: any) => sum + (doc.analytics?.timeSaved || 0),
+          (sum: number, doc: { analytics?: { timeSaved?: number } }) =>
+            sum + (doc.analytics?.timeSaved || 0),
           0
         );
 
         // Calculate average quality scores (using improvementScore as quality metric)
         const docsWithScores =
           data.documents?.filter(
-            (doc: any) => doc.analytics?.improvementScore
+            (doc: { analytics?: { improvementScore?: number } }) =>
+              doc.analytics?.improvementScore
           ) || [];
         const totalQualityScore = docsWithScores.reduce(
-          (sum: number, doc: any) =>
+          (sum: number, doc: { analytics: { improvementScore: number } }) =>
             sum + (doc.analytics.improvementScore || 0),
           0
         );
@@ -124,10 +128,12 @@ export default function Dashboard() {
             : 0;
 
         const thisMonthDocsWithScores =
-          thisMonthDocs.filter((doc: any) => doc.analytics?.improvementScore) ||
-          [];
+          thisMonthDocs.filter(
+            (doc: { analytics?: { improvementScore?: number } }) =>
+              doc.analytics?.improvementScore
+          ) || [];
         const thisMonthQualityScore = thisMonthDocsWithScores.reduce(
-          (sum: number, doc: any) =>
+          (sum: number, doc: { analytics: { improvementScore: number } }) =>
             sum + (doc.analytics.improvementScore || 0),
           0
         );
@@ -139,7 +145,7 @@ export default function Dashboard() {
         setStats({
           documentsProcessed: totalDocs,
           wordsEnhanced: totalWords,
-          timeSaved: totalTime, // Keep in minutes
+          timeSaved: totalTimeSaved, // Keep in minutes
           avgQualityScore: Math.round(avgQualityScore),
           thisMonth: {
             documents: thisMonthDocs.length,
@@ -363,55 +369,70 @@ export default function Dashboard() {
                 </div>
               ) : recentDocuments.length > 0 ? (
                 <div className="space-y-4">
-                  {recentDocuments.map((doc: any) => (
-                    <div
-                      key={doc.id}
-                      onClick={() => router.push(`/document/${doc.id}`)}
-                      className="group flex items-center justify-between p-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg border border-orange-200 cursor-pointer hover:shadow-md hover:border-orange-300 transition-all duration-200"
-                    >
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800 mb-1 group-hover:text-orange-700 transition-colors">
-                          {formatDocumentTitle(doc.title)}
-                        </h3>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
-                          <span className="flex items-center gap-1">
-                            <FileText className="h-4 w-4" />
-                            {doc.analytics?.wordsProcessed || 0} words
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {doc.analytics?.timeSaved || 0} min saved
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <BarChart3 className="h-4 w-4" />
-                            {doc.analytics?.improvementScore?.toFixed(1) || 0}%
-                            improvement
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-2">
-                          Processed on{" "}
-                          {new Date(doc.createdAt).toLocaleDateString()} with{" "}
-                          {doc.mechanisms?.join(", ") || "basic processing"}
-                        </p>
-                      </div>
-                      <div className="flex flex-col items-end gap-2">
-                        <div className="flex gap-1">
-                          {doc.mechanisms?.map((mechanism: string) => (
-                            <span
-                              key={mechanism}
-                              className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full"
-                            >
-                              {mechanism}
+                  {recentDocuments.map(
+                    (doc: {
+                      id: string;
+                      title: string;
+                      content: string;
+                      createdAt: string;
+                      mechanisms?: string[];
+                      analytics?: {
+                        wordsProcessed?: number;
+                        improvementScore?: number;
+                        timeSaved?: number;
+                        readabilityScore?: number;
+                      };
+                    }) => (
+                      <div
+                        key={doc.id}
+                        onClick={() => router.push(`/document/${doc.id}`)}
+                        className="group flex items-center justify-between p-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg border border-orange-200 cursor-pointer hover:shadow-md hover:border-orange-300 transition-all duration-200"
+                      >
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-800 mb-1 group-hover:text-orange-700 transition-colors">
+                            {formatDocumentTitle(doc.title)}
+                          </h3>
+                          <div className="flex items-center gap-4 text-sm text-gray-600">
+                            <span className="flex items-center gap-1">
+                              <FileText className="h-4 w-4" />
+                              {doc.analytics?.wordsProcessed || 0} words
                             </span>
-                          ))}
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {doc.analytics?.timeSaved || 0} min saved
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <BarChart3 className="h-4 w-4" />
+                              {doc.analytics?.improvementScore?.toFixed(1) || 0}
+                              % improvement
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-2">
+                            Processed on{" "}
+                            {new Date(doc.createdAt).toLocaleDateString()} with{" "}
+                            {doc.mechanisms?.join(", ") || "basic processing"}
+                          </p>
                         </div>
-                        <div className="text-xs text-gray-500">
-                          Quality:{" "}
-                          {doc.analytics?.readabilityScore?.toFixed(1) || 0}/100
+                        <div className="flex flex-col items-end gap-2">
+                          <div className="flex gap-1">
+                            {doc.mechanisms?.map((mechanism: string) => (
+                              <span
+                                key={mechanism}
+                                className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full"
+                              >
+                                {mechanism}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            Quality:{" "}
+                            {doc.analytics?.readabilityScore?.toFixed(1) || 0}
+                            /100
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                   {/* Show More Button */}
                   <div className="mt-6 text-center">
                     <Button
@@ -443,5 +464,13 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={<div>Loading dashboard...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }

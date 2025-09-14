@@ -8,7 +8,7 @@ import {
   Loader2,
   Copy,
   Download,
-  Save,
+  // Save, // Unused for now
   BarChart3,
   Clock,
   FileText,
@@ -59,7 +59,12 @@ export default function TextProcessor({
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const [analytics, setAnalytics] = useState<DocumentAnalytics | null>(null);
-  const [usage, setUsage] = useState<any>(null);
+  const [usage, setUsage] = useState<{
+    wordsUsed?: number;
+    wordLimit?: number;
+    wordsRemaining?: number;
+    timeSaved?: number;
+  } | null>(null);
   const [processingTime, setProcessingTime] = useState<number>(0);
   const { toast, showToast, hideToast } = useToast();
 
@@ -150,12 +155,13 @@ export default function TextProcessor({
       if (onProcessComplete) {
         onProcessComplete();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Processing failed:", error);
-      showToast(
-        error.message || "An error occurred while processing your text",
-        "error"
-      );
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "An error occurred while processing your text";
+      showToast(errorMessage, "error");
     } finally {
       setIsProcessing(false);
     }
@@ -196,7 +202,7 @@ export default function TextProcessor({
       if (!paragraph.trim()) return null;
 
       // Process inline formatting
-      let processedText = paragraph
+      const processedText = paragraph
         // Bold text
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
         // Italic text
@@ -233,6 +239,7 @@ export default function TextProcessor({
       await navigator.clipboard.writeText(plainText);
       showToast("Plain text copied to clipboard!", "success");
     } catch (error) {
+      console.error("Clipboard error:", error);
       showToast("Failed to copy text", "error");
     }
   };
@@ -278,7 +285,7 @@ export default function TextProcessor({
               className="bg-gradient-to-r from-orange-500 to-amber-500 h-2 rounded-full transition-all duration-500"
               style={{
                 width: `${Math.min(
-                  (usage.wordsUsed / usage.wordLimit) * 100,
+                  ((usage.wordsUsed || 0) / (usage.wordLimit || 1)) * 100,
                   100
                 )}%`,
               }}
@@ -481,8 +488,8 @@ The AI will preserve and enhance your formatting!"
                       {analytics.readabilityScore >= 60
                         ? "Easy to read"
                         : analytics.readabilityScore >= 30
-                        ? "Moderate"
-                        : "Complex"}
+                          ? "Moderate"
+                          : "Complex"}
                     </div>
                   </div>
 
@@ -497,8 +504,8 @@ The AI will preserve and enhance your formatting!"
                       {analytics.improvementScore >= 70
                         ? "Excellent"
                         : analytics.improvementScore >= 50
-                        ? "Good"
-                        : "Moderate"}
+                          ? "Good"
+                          : "Moderate"}
                     </div>
                   </div>
 
@@ -513,8 +520,8 @@ The AI will preserve and enhance your formatting!"
                       {analytics.complexityScore <= 30
                         ? "Simple"
                         : analytics.complexityScore <= 60
-                        ? "Moderate"
-                        : "Complex"}
+                          ? "Moderate"
+                          : "Complex"}
                     </div>
                   </div>
 

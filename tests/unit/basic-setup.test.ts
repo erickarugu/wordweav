@@ -12,9 +12,10 @@ describe("Basic Test Setup", () => {
   test("Module resolution works", () => {
     // This test verifies that our module mapping is working
     expect(() => {
-      // Simple require to verify path resolution
-      const path = require("path");
-      expect(path).toBeDefined();
+      // Simple import to verify path resolution
+      import("path").then((path) => {
+        expect(path).toBeDefined();
+      });
     }).not.toThrow();
   });
 });

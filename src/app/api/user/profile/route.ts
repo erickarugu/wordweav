@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { hashPassword, verifyPassword } from "@/lib/auth";
+import { securityMiddleware } from "@/lib/security";
+import { validateRequest, userProfileUpdateSchema } from "@/lib/validation";
 
-export async function GET() {
+async function getProfileHandler(): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -37,7 +39,9 @@ export async function GET() {
   }
 }
 
-export async function PUT(request: NextRequest) {
+async function updateProfileHandler(
+  request: NextRequest
+): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -45,11 +49,13 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { name, email, currentPassword, newPassword } = await request.json();
-
-    if (!name) {
-      return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    // Validate request data
+    const validation = await validateRequest(request, userProfileUpdateSchema);
+    if (!validation.success) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
     }
+
+    const { name, email, currentPassword, newPassword } = validation.data;
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
@@ -85,13 +91,6 @@ export async function PUT(request: NextRequest) {
           { status: 400 }
         );
       }
-
-      if (newPassword.length < 6) {
-        return NextResponse.json(
-          { error: "New password must be at least 6 characters" },
-          { status: 400 }
-        );
-      }
     }
 
     // Check if email is already taken by another user (only if email is being changed)
@@ -110,16 +109,19 @@ export async function PUT(request: NextRequest) {
 
     // Update user
     const updateData: {
-      name: string;
+      name?: string;
       email?: string;
       updatedAt: Date;
       password?: string;
     } = {
-      name,
       updatedAt: new Date(),
     };
 
-    // Only update email if it's provided
+    // Only update fields if provided
+    if (name) {
+      updateData.name = name;
+    }
+
     if (email) {
       updateData.email = email;
     }
@@ -153,3 +155,7 @@ export async function PUT(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware
+export const GET = securityMiddleware.api(getProfileHandler);
+export const PUT = securityMiddleware.api(updateProfileHandler);

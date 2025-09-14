@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendResetPasswordEmail } from "@/lib/email";
+import { withSecurity } from "@/lib/security";
 import crypto from "crypto";
 
-export async function POST(request: NextRequest) {
+// Create password reset handler
+async function forgotPasswordHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const { email } = await request.json();
 
@@ -84,3 +86,10 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware with password reset rate limiting (3 requests per hour)
+export const POST = withSecurity(forgotPasswordHandler, {
+  csrf: { enabled: false }, // Disable CSRF for password reset requests
+  authentication: { required: false },
+  rateLimit: { enabled: true, limiter: "passwordReset" },
+});

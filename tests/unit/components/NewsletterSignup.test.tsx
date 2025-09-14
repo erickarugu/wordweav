@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import { createMockNewsletterSubscriber } from "../../utils/testHelpers";
 
 // Mock fetch
 global.fetch = jest.fn();

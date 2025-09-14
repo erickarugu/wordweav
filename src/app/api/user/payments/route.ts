@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
+import { securityMiddleware } from "@/lib/security";
 
-export async function GET() {
+// Get payments handler
+async function getPaymentsHandler(): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -50,3 +52,6 @@ export async function GET() {
     );
   }
 }
+
+// Apply security middleware with payment rate limiting (10 requests per minute)
+export const GET = securityMiddleware.payment(getPaymentsHandler);

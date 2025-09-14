@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
+import { securityMiddleware } from "@/lib/security";
 
-export async function GET() {
+// Get subscription handler
+async function getSubscriptionHandler(): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -97,3 +99,6 @@ export async function GET() {
     );
   }
 }
+
+// Apply security middleware with API rate limiting (100 requests per minute)
+export const GET = securityMiddleware.api(getSubscriptionHandler);

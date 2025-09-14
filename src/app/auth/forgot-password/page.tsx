@@ -34,6 +34,7 @@ export default function ForgotPassword() {
         setError(data.error || "An error occurred. Please try again.");
       }
     } catch (error) {
+      console.error("Password reset error:", error);
       setError("Network error. Please check your connection and try again.");
     } finally {
       setLoading(false);

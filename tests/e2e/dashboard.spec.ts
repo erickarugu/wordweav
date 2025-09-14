@@ -187,7 +187,6 @@ test.describe("User Profile", () => {
     await page.goto("/profile");
 
     const nameInput = page.getByLabel(/name/i);
-    const emailInput = page.getByLabel(/email/i);
     const saveButton = page.getByRole("button", { name: /save/i });
 
     if (await nameInput.isVisible()) {

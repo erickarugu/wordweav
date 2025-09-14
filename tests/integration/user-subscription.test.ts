@@ -2,7 +2,6 @@
  * @jest-environment node
  */
 
-import { NextRequest } from "next/server";
 import { GET } from "@/app/api/user/subscription/route";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";

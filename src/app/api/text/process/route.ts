@@ -2,12 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { getAIService } from "@/lib/ai";
-
-interface ProcessTextRequest {
-  text: string;
-  title?: string;
-  mechanisms: string[];
-}
+import { securityMiddleware } from "@/lib/security";
+import { validateRequest, textProcessingSchema } from "@/lib/validation";
+import { getClientId } from "@/lib/rate-limit";
 
 interface TextAnalytics {
   readabilityScore: number;
@@ -21,7 +18,7 @@ interface TextAnalytics {
   timeSaved: number;
 }
 
-export async function POST(request: NextRequest) {
+async function processTextHandler(request: NextRequest): Promise<NextResponse> {
   try {
     const session = await getServerSession();
 
@@ -37,13 +34,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const { text, title, mechanisms }: ProcessTextRequest =
-      await request.json();
-
-    if (!text || !text.trim()) {
-      return NextResponse.json({ error: "Text is required" }, { status: 400 });
+    // Validate request data
+    const validation = await validateRequest(request, textProcessingSchema);
+    if (!validation.success) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
+    const { text, title, mechanisms } = validation.data;
     const wordCount = text.trim().split(/\s+/).length;
 
     // Check usage limits (15,000 words per month)
@@ -283,6 +280,9 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// Apply security middleware
+export const POST = securityMiddleware.textProcessing(processTextHandler);
 
 async function processTextWithMechanisms(
   text: string,

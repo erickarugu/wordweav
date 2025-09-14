@@ -11,7 +11,6 @@ import {
   Link,
   Row,
   Column,
-  Img,
 } from "@react-email/components";
 import * as React from "react";
 

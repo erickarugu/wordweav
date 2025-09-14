@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,7 +49,7 @@ interface DocumentData {
 // Helper function to render markup text
 function renderMarkupText(text: string) {
   // Convert markdown-style formatting to HTML
-  let formattedText = text
+  const formattedText = text
     // Headers
     .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mb-4">$1</h1>')
     .replace(/^## (.*$)/gim, '<h2 class="text-xl font-semibold mb-3">$1</h2>')
@@ -82,24 +82,13 @@ function stripMarkup(text: string): string {
 export default function DocumentDetail() {
   const params = useParams();
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [document, setDocument] = useState<DocumentData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { toast, showToast } = useToast();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/signin");
-      return;
-    }
-
-    if (params.id) {
-      fetchDocument();
-    }
-  }, [params.id, status]);
-
-  const fetchDocument = async () => {
+  const fetchDocument = useCallback(async () => {
     try {
       const response = await fetch(`/api/text/documents/${params.id}`);
       if (response.ok) {
@@ -116,7 +105,18 @@ export default function DocumentDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/signin");
+      return;
+    }
+
+    if (params.id) {
+      fetchDocument();
+    }
+  }, [params.id, status, fetchDocument, router]);
 
   const copyToClipboard = async (
     text: string,
@@ -132,6 +132,7 @@ export default function DocumentDetail() {
         "success"
       );
     } catch (error) {
+      console.error("Copy to clipboard error:", error);
       showToast("Failed to copy text", "error");
     }
   };
