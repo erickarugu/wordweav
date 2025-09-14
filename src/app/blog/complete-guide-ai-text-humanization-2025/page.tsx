@@ -23,8 +23,8 @@ export default function CompleteGuidePost() {
     headline: "Complete Guide to AI Text Humanization in 2025",
     description:
       "Master AI text humanization with our comprehensive 2025 guide. Learn to transform AI content into natural, human-like text that bypasses detection tools.",
-    datePublished: "2025-03-15",
-    dateModified: "2025-03-15",
+    datePublished: "2025-09-15",
+    dateModified: "2025-09-15",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -62,7 +62,7 @@ export default function CompleteGuidePost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Guide
               </span>
-              <span>March 15, 2025</span>
+              <span>September 15, 2025</span>
               <span>•</span>
               <span>8 min read</span>
             </div>

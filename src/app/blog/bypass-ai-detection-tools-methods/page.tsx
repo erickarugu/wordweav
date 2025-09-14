@@ -23,8 +23,8 @@ export default function BypassDetectionPost() {
     headline: "How to Bypass AI Detection Tools: 10 Proven Methods",
     description:
       "Discover 10 effective techniques to make your AI content undetectable by popular AI detection tools like GPTZero, Turnitin, and Originality.ai.",
-    datePublished: "2025-03-12",
-    dateModified: "2025-03-12",
+    datePublished: "2025-09-12",
+    dateModified: "2025-09-12",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -62,7 +62,7 @@ export default function BypassDetectionPost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Tutorial
               </span>
-              <span>March 12, 2025</span>
+              <span>September 12, 2025</span>
               <span>•</span>
               <span>6 min read</span>
             </div>

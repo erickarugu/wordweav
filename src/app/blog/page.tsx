@@ -26,7 +26,7 @@ const blogPosts = [
     slug: "complete-guide-ai-text-humanization-2025",
     category: "Guide",
     readTime: "8 min read",
-    date: "March 15, 2025",
+    date: "September 15, 2025",
   },
   {
     title: "How to Bypass AI Detection Tools: 10 Proven Methods",
@@ -35,7 +35,7 @@ const blogPosts = [
     slug: "bypass-ai-detection-tools-methods",
     category: "Tutorial",
     readTime: "6 min read",
-    date: "March 12, 2025",
+    date: "September 12, 2025",
   },
   {
     title: "ChatGPT vs Human Writing: Key Differences and Solutions",
@@ -44,7 +44,7 @@ const blogPosts = [
     slug: "chatgpt-vs-human-writing-differences",
     category: "Analysis",
     readTime: "5 min read",
-    date: "March 10, 2025",
+    date: "September 10, 2025",
   },
   {
     title: "Best AI Humanizer Tools Compared: WordWeave vs Competitors",
@@ -53,7 +53,7 @@ const blogPosts = [
     slug: "best-ai-humanizer-tools-comparison",
     category: "Review",
     readTime: "10 min read",
-    date: "March 8, 2025",
+    date: "September 8, 2025",
   },
   {
     title: "Academic Writing: How to Humanize AI Essays Effectively",
@@ -62,7 +62,7 @@ const blogPosts = [
     slug: "humanize-ai-essays-academic-writing",
     category: "Education",
     readTime: "7 min read",
-    date: "March 5, 2025",
+    date: "August 25, 2025",
   },
   {
     title: "Content Marketing with AI: Humanization Best Practices",
@@ -71,7 +71,7 @@ const blogPosts = [
     slug: "content-marketing-ai-humanization-practices",
     category: "Marketing",
     readTime: "9 min read",
-    date: "March 3, 2025",
+    date: "August 22, 2025",
   },
 ];
 

@@ -23,8 +23,8 @@ export default function AcademicWritingPost() {
     headline: "Academic Writing: How to Humanize AI Essays Effectively",
     description:
       "Step-by-step guide for students and academics to transform AI-generated essays into authentic, human-written content that passes detection tools.",
-    datePublished: "2025-03-05",
-    dateModified: "2025-03-05",
+    datePublished: "2025-08-25",
+    dateModified: "2025-08-25",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -62,7 +62,7 @@ export default function AcademicWritingPost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Education
               </span>
-              <span>March 5, 2025</span>
+              <span>August 25, 2025</span>
               <span>•</span>
               <span>7 min read</span>
             </div>

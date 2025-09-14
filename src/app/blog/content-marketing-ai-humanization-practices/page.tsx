@@ -23,8 +23,8 @@ export default function ContentMarketingPost() {
     headline: "Content Marketing with AI Humanization: Best Practices for 2025",
     description:
       "Master AI humanization for content marketing success. Learn proven strategies to create authentic, engaging content that converts while passing AI detection.",
-    datePublished: "2025-03-10",
-    dateModified: "2025-03-10",
+    datePublished: "2025-08-22",
+    dateModified: "2025-08-22",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -62,7 +62,7 @@ export default function ContentMarketingPost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Marketing
               </span>
-              <span>March 10, 2025</span>
+              <span>August 22, 2025</span>
               <span>•</span>
               <span>8 min read</span>
             </div>

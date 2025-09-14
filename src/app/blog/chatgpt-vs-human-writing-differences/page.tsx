@@ -23,8 +23,8 @@ export default function ChatGPTVsHumanPost() {
     headline: "ChatGPT vs Human Writing: Key Differences and Solutions",
     description:
       "Learn to identify telltale signs of AI writing and discover effective solutions to transform ChatGPT content into natural, human-like text.",
-    datePublished: "2025-03-10",
-    dateModified: "2025-03-10",
+    datePublished: "2025-09-10",
+    dateModified: "2025-09-10",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -62,7 +62,7 @@ export default function ChatGPTVsHumanPost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Analysis
               </span>
-              <span>March 10, 2025</span>
+              <span>September 10, 2025</span>
               <span>•</span>
               <span>5 min read</span>
             </div>

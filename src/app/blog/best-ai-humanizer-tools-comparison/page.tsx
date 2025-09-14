@@ -23,8 +23,8 @@ export default function ToolsComparisonPost() {
     headline: "Best AI Humanizer Tools Compared: WordWeave vs Competitors 2025",
     description:
       "Comprehensive comparison of top AI humanization tools including WordWeave, Undetectable AI, and StealthWriter. See which tool delivers the best results.",
-    datePublished: "2025-03-08",
-    dateModified: "2025-03-08",
+    datePublished: "2025-09-08",
+    dateModified: "2025-09-08",
     author: {
       "@type": "Organization",
       name: "WordWeave",
@@ -126,7 +126,7 @@ export default function ToolsComparisonPost() {
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
                 Review
               </span>
-              <span>March 8, 2025</span>
+              <span>September 8, 2025</span>
               <span>•</span>
               <span>10 min read</span>
             </div>
