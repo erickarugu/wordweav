@@ -22,6 +22,8 @@ export default function WordWeaveLogo({
         viewBox="0 0 140 45"
         className={className}
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="WordWeave Logo"
       >
         <defs>
           <linearGradient
@@ -110,6 +112,8 @@ export default function WordWeaveLogo({
       viewBox="0 0 220 70"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="WordWeave Logo"
     >
       <defs>
         {/* Gradient for the text */}

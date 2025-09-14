@@ -1,5 +1,5 @@
-import '@types/jest'
+import "@types/jest";
 
 declare global {
-  var jest: typeof import('@jest/globals').jest
+  var jest: typeof import("@jest/globals").jest;
 }
