@@ -146,3 +146,14 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+  isActive     Boolean  @default(true) @map("is_active")
+  unsubscribedAt DateTime? @map("unsubscribed_at")
+  source       String?  // Track where they subscribed from (blog, homepage, etc.)
+
+  @@map("newsletter_subscribers")
+}

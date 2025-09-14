@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "AI Text Humanization Blog - Tips, Guides & Best Practices",
@@ -178,29 +179,7 @@ export default function Blog() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="mt-20">
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-orange-200 text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Stay Updated on AI Humanization
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Get the latest tips, guides, and insights on AI text humanization
-              delivered to your inbox. Learn how to make your AI content
-              undetectable.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border border-orange-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-              />
-              <button className="bg-gradient-to-r from-orange-600 to-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </section>
+        <NewsletterSignup />
       </main>
     </div>
   );
