@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function CompleteGuidePost() {
   const structuredData = generateStructuredData("article", {
-    headline: "Complete Guide to AI Text Humanization in 2025",
+    title: "Complete Guide to AI Text Humanization in 2025",
     description:
       "Master AI text humanization with our comprehensive 2025 guide. Learn to transform AI content into natural, human-like text that bypasses detection tools.",
-    datePublished: "2025-09-15",
-    dateModified: "2025-09-15",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-09-15",
+    updatedAt: "2025-09-15",
     image: "https://wordweave.app/assets/ai-humanization-guide.jpg",
   });
 

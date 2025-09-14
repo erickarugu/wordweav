@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function ContentMarketingPost() {
   const structuredData = generateStructuredData("article", {
-    headline: "Content Marketing with AI Humanization: Best Practices for 2025",
+    title: "Content Marketing with AI Humanization: Best Practices for 2025",
     description:
       "Master AI humanization for content marketing success. Learn proven strategies to create authentic, engaging content that converts while passing AI detection.",
-    datePublished: "2025-08-22",
-    dateModified: "2025-08-22",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-08-22",
+    updatedAt: "2025-08-22",
     image: "https://wordweave.app/assets/content-marketing-ai.jpg",
   });
 

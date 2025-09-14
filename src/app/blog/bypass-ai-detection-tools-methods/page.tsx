@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function BypassDetectionPost() {
   const structuredData = generateStructuredData("article", {
-    headline: "How to Bypass AI Detection Tools: 10 Proven Methods",
+    title: "How to Bypass AI Detection Tools: 10 Proven Methods",
     description:
       "Discover 10 effective techniques to make your AI content undetectable by popular AI detection tools like GPTZero, Turnitin, and Originality.ai.",
-    datePublished: "2025-09-12",
-    dateModified: "2025-09-12",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-09-12",
+    updatedAt: "2025-09-12",
     image: "https://wordweave.app/assets/bypass-ai-detection.jpg",
   });
 

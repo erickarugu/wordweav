@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function ToolsComparisonPost() {
   const structuredData = generateStructuredData("article", {
-    headline: "Best AI Humanizer Tools Compared: WordWeave vs Competitors 2025",
+    title: "Best AI Humanizer Tools Compared: WordWeave vs Competitors 2025",
     description:
       "Comprehensive comparison of top AI humanization tools including WordWeave, Undetectable AI, and StealthWriter. See which tool delivers the best results.",
-    datePublished: "2025-09-08",
-    dateModified: "2025-09-08",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-09-08",
+    updatedAt: "2025-09-08",
     image: "https://wordweave.app/assets/ai-tools-comparison.jpg",
   });
 

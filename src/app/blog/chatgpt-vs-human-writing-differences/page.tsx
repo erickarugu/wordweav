@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function ChatGPTVsHumanPost() {
   const structuredData = generateStructuredData("article", {
-    headline: "ChatGPT vs Human Writing: Key Differences and Solutions",
+    title: "ChatGPT vs Human Writing: Key Differences and Solutions",
     description:
       "Learn to identify telltale signs of AI writing and discover effective solutions to transform ChatGPT content into natural, human-like text.",
-    datePublished: "2025-09-10",
-    dateModified: "2025-09-10",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-09-10",
+    updatedAt: "2025-09-10",
     image: "https://wordweave.app/assets/chatgpt-vs-human-writing.jpg",
   });
 

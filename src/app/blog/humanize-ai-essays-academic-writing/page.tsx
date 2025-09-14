@@ -20,15 +20,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function AcademicWritingPost() {
   const structuredData = generateStructuredData("article", {
-    headline: "Academic Writing: How to Humanize AI Essays Effectively",
+    title: "Academic Writing: How to Humanize AI Essays Effectively",
     description:
       "Step-by-step guide for students and academics to transform AI-generated essays into authentic, human-written content that passes detection tools.",
-    datePublished: "2025-08-25",
-    dateModified: "2025-08-25",
-    author: {
-      "@type": "Organization",
-      name: "WordWeave",
-    },
+    publishedAt: "2025-08-25",
+    updatedAt: "2025-08-25",
     image: "https://wordweave.app/assets/academic-ai-writing.jpg",
   });
 
