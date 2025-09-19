@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { getAIService } from "@/lib/ai";
 import { securityMiddleware } from "@/lib/security";
 import { validateRequest, textProcessingSchema } from "@/lib/validation";
-import { getClientId } from "@/lib/rate-limit";
 
 interface TextAnalytics {
   readabilityScore: number;

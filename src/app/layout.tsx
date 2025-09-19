@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import { generatePageMetadata, generateStructuredData } from "@/lib/seo";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,6 +51,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Structured Data */}
+        <Script
+          defer
+          data-website-id="68cbdcbc589a08dd3e2db188"
+          data-domain="wordweav.com"
+          src="https://datafa.st/js/script.js"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  # Next.js Application (Production with Supabase)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wordweave-app-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GITHUB_ID=${GITHUB_ID}
+      - GITHUB_SECRET=${GITHUB_SECRET}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - LEMONSQUEEZY_API_KEY=${LEMONSQUEEZY_API_KEY}
+      - LEMONSQUEEZY_STORE_ID=${LEMONSQUEEZY_STORE_ID}
+      - LEMONSQUEEZY_MONTHLY_VARIANT_ID=${LEMONSQUEEZY_MONTHLY_VARIANT_ID}
+      - LEMONSQUEEZY_YEARLY_VARIANT_ID=${LEMONSQUEEZY_YEARLY_VARIANT_ID}
+      - LEMONSQUEEZY_WEBHOOK_SECRET=${LEMONSQUEEZY_WEBHOOK_SECRET}
+      - SUPABASE_PROD_URL=${SUPABASE_PROD_URL}
+      - SUPABASE_PROD_KEY=${SUPABASE_PROD_KEY}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -129,7 +129,7 @@ export async function validateRequest<T>(
     const result = schema.safeParse(body);
 
     if (!result.success) {
-      const errors = result.error.errors
+      const errors = result.error.issues
         .map((err: z.ZodIssue) => `${err.path.join(".")}: ${err.message}`)
         .join(", ");
 
@@ -165,7 +165,7 @@ export function validateQueryParam(
   if (!result.success) {
     return {
       success: false,
-      error: result.error.errors[0]?.message || "Invalid parameter",
+      error: result.error.issues[0]?.message || "Invalid parameter",
     };
   }
 
