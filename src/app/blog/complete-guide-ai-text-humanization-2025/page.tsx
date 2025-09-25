@@ -25,7 +25,7 @@ export default function CompleteGuidePost() {
       "Master AI text humanization with our comprehensive 2025 guide. Learn to transform AI content into natural, human-like text that bypasses detection tools.",
     publishedAt: "2025-09-15",
     updatedAt: "2025-09-15",
-    image: "https://wordweave.app/assets/ai-humanization-guide.jpg",
+    image: "https://wordweav.com/assets/ai-humanization-guide.jpg",
   });
 
   return (

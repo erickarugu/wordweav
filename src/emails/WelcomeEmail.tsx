@@ -98,7 +98,7 @@ export default function WelcomeEmail({ name = "Writer" }: WelcomeEmailProps) {
 
             {/* CTA Button */}
             <Section style={buttonContainer}>
-              <Button style={button} href="https://wordweave.app/dashboard">
+              <Button style={button} href="https://wordweav.com/dashboard">
                 Start Writing Better Today →
               </Button>
             </Section>
@@ -137,7 +137,7 @@ export default function WelcomeEmail({ name = "Writer" }: WelcomeEmailProps) {
             <Text style={footerText}>
               Need help getting started? Just reply to this email - we're here
               to help with a smile! 😊 You can also check out our{" "}
-              <Link href="https://wordweave.app/help" style={link}>
+              <Link href="https://wordweav.com/help" style={link}>
                 quick start guide
               </Link>{" "}
               for tips and tricks.
@@ -158,11 +158,11 @@ export default function WelcomeEmail({ name = "Writer" }: WelcomeEmailProps) {
               You're receiving this because you signed up for WordWeave.
             </Text>
             <Text style={footerSmall}>
-              <Link href="https://wordweave.app/unsubscribe" style={footerLink}>
+              <Link href="https://wordweav.com/unsubscribe" style={footerLink}>
                 Unsubscribe
               </Link>{" "}
               |{" "}
-              <Link href="https://wordweave.app/privacy" style={footerLink}>
+              <Link href="https://wordweav.com/privacy" style={footerLink}>
                 Privacy Policy
               </Link>
             </Text>

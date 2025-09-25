@@ -25,7 +25,7 @@ export default function ToolsComparisonPost() {
       "Comprehensive comparison of top AI humanization tools including WordWeave, Undetectable AI, and StealthWriter. See which tool delivers the best results.",
     publishedAt: "2025-09-08",
     updatedAt: "2025-09-08",
-    image: "https://wordweave.app/assets/ai-tools-comparison.jpg",
+    image: "https://wordweav.com/assets/ai-tools-comparison.jpg",
   });
 
   const tools = [

@@ -25,7 +25,7 @@ export default function AcademicWritingPost() {
       "Step-by-step guide for students and academics to transform AI-generated essays into authentic, human-written content that passes detection tools.",
     publishedAt: "2025-08-25",
     updatedAt: "2025-08-25",
-    image: "https://wordweave.app/assets/academic-ai-writing.jpg",
+    image: "https://wordweav.com/assets/academic-ai-writing.jpg",
   });
 
   return (

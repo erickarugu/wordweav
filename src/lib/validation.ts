@@ -199,7 +199,7 @@ export function validateSecurityHeaders(headers: Headers): {
   const allowedOrigins = [
     process.env.NEXTAUTH_URL,
     "http://localhost:3000",
-    "https://wordweave.app", // Add your production domain
+    "https://wordweav.com", // Add your production domain
   ].filter(Boolean) as string[];
 
   const hasValidOrigin =

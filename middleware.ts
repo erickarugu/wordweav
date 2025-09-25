@@ -110,7 +110,7 @@ export function middleware(request: NextRequest) {
       const allowedOrigins = [
         process.env.NEXTAUTH_URL,
         "http://localhost:3000",
-        "https://wordweave.app", // Add your production domain
+        "https://wordweav.com", // Add your production domain
       ].filter(Boolean);
 
       if (origin && allowedOrigins.includes(origin)) {

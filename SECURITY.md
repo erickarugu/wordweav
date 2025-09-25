@@ -335,8 +335,8 @@ npm run security:scan
 
 ### Contact Information:
 
-- Security Team: [security@wordweave.app]
-- Emergency: [emergency-security@wordweave.app]
+- Security Team: [security@wordweav.com]
+- Emergency: [emergency-security@wordweav.com]
 
 ---
 

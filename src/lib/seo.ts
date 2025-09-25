@@ -1,7 +1,7 @@
 // SEO Configuration for WordWeave - AI Text Humanizer
 export const SEO_CONFIG = {
   siteName: "WordWeave",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://wordweave.ai",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://wordweav.com",
   defaultTitle:
     "WordWeave - AI Text Humanizer | Convert AI Content to 100% Human Text",
   titleTemplate: "%s | WordWeave - AI Text Humanizer",
@@ -31,15 +31,15 @@ export const SEO_CONFIG = {
   organization: {
     "@type": "Organization",
     name: "WordWeave",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://wordweave.ai",
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://wordweave.ai"}/logo.png`,
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://wordweav.com",
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://wordweav.com"}/logo.png`,
     description:
       "Advanced AI text humanizer that converts AI-generated content into natural, human-like text",
     foundingDate: "2025",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "support@wordweave.ai",
+      email: "support@wordweav.com",
     },
     sameAs: [
       "https://twitter.com/wordweaveai",

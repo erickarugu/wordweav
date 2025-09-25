@@ -25,7 +25,7 @@ export default function ContentMarketingPost() {
       "Master AI humanization for content marketing success. Learn proven strategies to create authentic, engaging content that converts while passing AI detection.",
     publishedAt: "2025-08-22",
     updatedAt: "2025-08-22",
-    image: "https://wordweave.app/assets/content-marketing-ai.jpg",
+    image: "https://wordweav.com/assets/content-marketing-ai.jpg",
   });
 
   return (

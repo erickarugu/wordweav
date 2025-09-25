@@ -25,7 +25,7 @@ export default function ChatGPTVsHumanPost() {
       "Learn to identify telltale signs of AI writing and discover effective solutions to transform ChatGPT content into natural, human-like text.",
     publishedAt: "2025-09-10",
     updatedAt: "2025-09-10",
-    image: "https://wordweave.app/assets/chatgpt-vs-human-writing.jpg",
+    image: "https://wordweav.com/assets/chatgpt-vs-human-writing.jpg",
   });
 
   return (

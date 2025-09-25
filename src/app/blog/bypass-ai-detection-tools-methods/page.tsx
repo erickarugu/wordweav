@@ -25,7 +25,7 @@ export default function BypassDetectionPost() {
       "Discover 10 effective techniques to make your AI content undetectable by popular AI detection tools like GPTZero, Turnitin, and Originality.ai.",
     publishedAt: "2025-09-12",
     updatedAt: "2025-09-12",
-    image: "https://wordweave.app/assets/bypass-ai-detection.jpg",
+    image: "https://wordweav.com/assets/bypass-ai-detection.jpg",
   });
 
   return (

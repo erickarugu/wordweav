@@ -39,7 +39,7 @@ RESEND_API_KEY=re_your_api_key_here
 **Current Configuration:**
 
 - Development: `onboarding@resend.dev`
-- Production: `welcome@wordweave.app` (update to your domain)
+- Production: `welcome@wordweav.com` (update to your domain)
 
 ## Email Templates
 

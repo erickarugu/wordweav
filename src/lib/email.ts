@@ -45,7 +45,7 @@ export async function sendWelcomeEmail({ to, name }: SendWelcomeEmailParams) {
     // Update this to your verified domain in production
     const fromEmail =
       process.env.NODE_ENV === "production"
-        ? "WordWeave <welcome@wordweave.app>"
+        ? "WordWeave <welcome@wordweav.com>"
         : "WordWeave <onboarding@resend.dev>";
 
     const { data, error } = await resend.emails.send({
@@ -90,7 +90,7 @@ export async function sendSubscriptionSuccessEmail({
     // Use onboarding@resend.dev for development/testing
     const fromEmail =
       process.env.NODE_ENV === "production"
-        ? "WordWeave <welcome@wordweave.app>"
+        ? "WordWeave <welcome@wordweav.com>"
         : "WordWeave <onboarding@resend.dev>";
 
     const { data, error } = await resend.emails.send({
@@ -125,7 +125,7 @@ export async function sendResetPasswordEmail({
     // Use onboarding@resend.dev for development/testing
     const fromEmail =
       process.env.NODE_ENV === "production"
-        ? "WordWeave <security@wordweave.app>"
+        ? "WordWeave <security@wordweav.com>"
         : "Acme <onboarding@resend.dev>";
 
     const { data, error } = await resend.emails.send({
@@ -154,7 +154,7 @@ export async function sendEmail({
   subject,
   html,
   from = process.env.NODE_ENV === "production"
-    ? "WordWeave <noreply@wordweave.app>"
+    ? "WordWeave <noreply@wordweav.com>"
     : "WordWeave <onboarding@resend.dev>",
 }: {
   to: string;

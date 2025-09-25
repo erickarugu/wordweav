@@ -35,7 +35,7 @@ const blogPosts = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wordweave.ai";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wordweav.com";
   const currentDate = new Date().toISOString();
 
   // Core pages with appropriate priorities and change frequencies

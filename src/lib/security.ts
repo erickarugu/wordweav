@@ -293,7 +293,7 @@ export function isAllowedOrigin(origin: string | null): boolean {
   const allowedOrigins = [
     process.env.NEXTAUTH_URL,
     "http://localhost:3000",
-    "https://wordweave.app",
+    "https://wordweav.com",
     // Add your production domains
   ].filter(Boolean) as string[];
 
