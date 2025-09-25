@@ -45,7 +45,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: [
           "/",
           "/pricing",
-          "/features", 
+          "/features",
           "/how-it-works",
           "/blog",
           "/blog/*",
