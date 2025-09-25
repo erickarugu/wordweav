@@ -55,7 +55,7 @@ export default function RootLayout({
           defer
           data-website-id="68cbdcbc589a08dd3e2db188"
           data-domain="wordweav.com"
-          src="https://datafa.st/js/script.js"
+          src="/js/script.js"
         />
         <script
           type="application/ld+json"
