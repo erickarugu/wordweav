@@ -313,24 +313,23 @@ function LandingPageContent() {
                 </div>
               </div>
 
-              {/* SEO-Optimized Subtitle - AI Text Humanization */}
+              {/* SEO-Optimized Subtitle - Professional Writing Enhancement */}
               <div className="mb-12 max-w-4xl mx-auto">
                 <h2 className="text-2xl md:text-3xl text-gray-700 font-light leading-relaxed mb-6">
                   Transform{" "}
                   <span className="font-semibold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
-                    AI-generated text
+                    robotic AI text
                   </span>{" "}
                   into{" "}
                   <span className="font-semibold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
-                    100% human content
+                    natural, professional content
                   </span>{" "}
-                  that passes any AI detection tool
+                  that engages your audience
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Our advanced AI humanizer converts robotic AI text into
-                  natural, engaging content that reads like it was written by a
-                  human. Make your AI content undetectable while maintaining
-                  quality and meaning.
+                  Enhance your AI-assisted writing with our professional text refinement tool. 
+                  Perfect for content creators, marketers, and professionals who want to improve 
+                  readability, tone, and engagement in their AI-assisted drafts.
                 </p>
 
                 {/* Before/After Example */}
