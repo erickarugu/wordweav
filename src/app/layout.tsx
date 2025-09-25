@@ -71,9 +71,24 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         {/* Favicon and icons */}
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          sizes="16x16"
+          type="image/x-icon"
+        />
+        <link
+          rel="icon"
+          href="/favicon-32x32.svg"
+          sizes="32x32"
+          type="image/svg+xml"
+        />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          href="/apple-touch-icon.png"
+          sizes="180x180"
+        />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body
