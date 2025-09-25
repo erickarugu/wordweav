@@ -54,7 +54,9 @@ async function verifyWithSupabase() {
       console.log(`\n📄 DOCUMENTS (showing last 10):`);
       documents?.forEach((doc, i) => {
         console.log(`   ${i + 1}. "${doc.title}" (${doc.word_count} words)`);
-        const userEmail = Array.isArray(doc.users) ? doc.users[0]?.email : (doc.users as { email: string })?.email;
+        const userEmail = Array.isArray(doc.users)
+          ? doc.users[0]?.email
+          : (doc.users as { email: string })?.email;
         console.log(`      By: ${userEmail || "Unknown"}`);
         console.log(
           `      Created: ${new Date(doc.created_at).toLocaleDateString()}`
@@ -74,12 +76,12 @@ async function verifyWithSupabase() {
       console.error("❌ Error fetching accounts:", accountsError);
     } else {
       console.log(`\n🔑 OAUTH ACCOUNTS (${accounts?.length || 0}):`);
-      accounts?.forEach((account: { provider: string; users: { email: string }[] }, i) => {
-        const userEmail = account.users?.[0]?.email || "Unknown";
-        console.log(
-          `   ${i + 1}. ${account.provider} → ${userEmail}`
-        );
-      });
+      accounts?.forEach(
+        (account: { provider: string; users: { email: string }[] }, i) => {
+          const userEmail = account.users?.[0]?.email || "Unknown";
+          console.log(`   ${i + 1}. ${account.provider} → ${userEmail}`);
+        }
+      );
     }
 
     // Check payments
@@ -97,16 +99,27 @@ async function verifyWithSupabase() {
       console.error("❌ Error fetching payments:", paymentsError);
     } else {
       console.log(`\n💳 PAYMENTS (${payments?.length || 0}):`);
-      payments?.forEach((payment: { amount: number; currency: string; status: string; payment_date: string; users: { email: string }[] }, i) => {
-        const userEmail = payment.users?.[0]?.email || "Unknown";
-        console.log(
-          `   ${i + 1}. $${(payment.amount / 100).toFixed(2)} ${payment.currency.toUpperCase()} (${payment.status})`
-        );
-        console.log(`      By: ${userEmail}`);
-        console.log(
-          `      Date: ${new Date(payment.payment_date).toLocaleDateString()}`
-        );
-      });
+      payments?.forEach(
+        (
+          payment: {
+            amount: number;
+            currency: string;
+            status: string;
+            payment_date: string;
+            users: { email: string }[];
+          },
+          i
+        ) => {
+          const userEmail = payment.users?.[0]?.email || "Unknown";
+          console.log(
+            `   ${i + 1}. $${(payment.amount / 100).toFixed(2)} ${payment.currency.toUpperCase()} (${payment.status})`
+          );
+          console.log(`      By: ${userEmail}`);
+          console.log(
+            `      Date: ${new Date(payment.payment_date).toLocaleDateString()}`
+          );
+        }
+      );
     }
 
     console.log("\n" + "=".repeat(50));

@@ -23,7 +23,8 @@
     "db:backup": "bash scripts/db-backup.sh backup",
     "db:restore": "bash scripts/db-backup.sh restore",
     "db:migrate-from-sqlite": "node scripts/migrate-to-postgres.mjs",
-    "db:health": "curl -f http://localhost:3000/api/health/database || echo 'Health check failed'"
+    "db:health": "curl -f http://localhost:3000/api/health/database || echo 'Health check failed'",
+    "db:test-config": "npx tsx scripts/test-db-config.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",

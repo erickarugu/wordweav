@@ -26,29 +26,43 @@ interface EnvironmentConfig {
 
 function getEnvironmentConfig(): EnvironmentConfig {
   const isProduction = process.env.NODE_ENV === "production";
+  const databaseUrl = process.env.DATABASE_URL!;
 
-  // Simple logic: production = Supabase, development = local PostgreSQL
+  console.log("NODE_ENV:", process.env.NODE_ENV);
+  console.log(
+    "DATABASE_URL contains 'supabase':",
+    databaseUrl?.includes("supabase")
+  );
+
+  // Auto-detect if using Supabase based on DATABASE_URL
+  const isUsingSupabase =
+    databaseUrl?.includes("supabase.com") ||
+    databaseUrl?.includes("supabase.co");
+
+  // Environment detection
   const environment = isProduction ? "production" : "local";
 
-  // Get Supabase configuration (always use production Supabase)
+  // Get Supabase configuration
   const supabaseUrl = process.env.SUPABASE_PROD_URL!;
   const supabaseKey = process.env.SUPABASE_PROD_KEY!;
 
   return {
     environment,
     database: {
-      provider: isProduction ? "supabase" : "prisma",
-      url: process.env.DATABASE_URL!,
+      // Use supabase provider if DATABASE_URL points to Supabase, otherwise use prisma
+      provider: isUsingSupabase ? "supabase" : "prisma",
+      url: databaseUrl,
     },
     supabase: {
       url: supabaseUrl,
       key: supabaseKey,
     },
     features: {
-      useSupabaseAuth: isProduction,
-      useSupabaseStorage: isProduction,
+      // Enable Supabase features based on whether we're using Supabase as database
+      useSupabaseAuth: isUsingSupabase,
+      useSupabaseStorage: isUsingSupabase,
       enableAnalytics: isProduction,
-      enableRealtime: isProduction,
+      enableRealtime: isUsingSupabase,
     },
   };
 }
@@ -60,4 +74,9 @@ if (process.env.NODE_ENV !== "production") {
   console.log(`🔧 Environment: ${config.environment}`);
   console.log(`🗄️  Database provider: ${config.database.provider}`);
   console.log(`🚀 Supabase URL: ${config.supabase.url}`);
+  console.log(`📊 Features enabled:`, {
+    supabaseAuth: config.features.useSupabaseAuth,
+    supabaseStorage: config.features.useSupabaseStorage,
+    realtime: config.features.enableRealtime,
+  });
 }

@@ -8,8 +8,9 @@
 
 import { supabase } from "./supabase";
 import { PrismaClient } from "@prisma/client";
+import { config } from "./config";
 
-// Initialize Prisma client for local development
+// Initialize Prisma client
 const prisma = new PrismaClient();
 
 // Types
@@ -59,8 +60,8 @@ export interface UsageStats {
 }
 
 class DatabaseService {
-  // Simple logic: production = Supabase, development = local PostgreSQL
-  private useSupabase = process.env.NODE_ENV === "production";
+  // Auto-detect database provider based on configuration
+  private useSupabase = config.database.provider === "supabase";
 
   // User operations
   async createUser(userData: Partial<User>): Promise<User> {
