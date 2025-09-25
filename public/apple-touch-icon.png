@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <defs>
+    <linearGradient id="apple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#ea580c;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b91c1c;stop-opacity:1" />
+    </linearGradient>
+    <filter id="apple-shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background with rounded corners for iOS -->
+  <rect width="180" height="180" rx="40" fill="url(#apple-gradient)" filter="url(#apple-shadow)"/>
+  
+  <!-- Large, detailed "W" -->
+  <g fill="white" opacity="0.95">
+    <path d="M40 45 L50 135 L65 135 L82.5 80 L100 135 L115 135 L132.5 80 L150 135 L165 135 L145 45 L125 45 L107.5 100 L90 45 L75 45 L57.5 100 L40 45 Z" stroke="white" stroke-width="1" opacity="0.1"/>
+  </g>
+  
+  <!-- Transformation elements -->
+  <g opacity="0.7">
+    <!-- AI elements (geometric) -->
+    <rect x="25" y="25" width="8" height="8" fill="white" opacity="0.6" rx="1"/>
+    <rect x="25" y="38" width="6" height="6" fill="white" opacity="0.4" rx="1"/>
+    <rect x="25" y="48" width="4" height="4" fill="white" opacity="0.3" rx="0.5"/>
+    
+    <!-- Human elements (organic) -->
+    <circle cx="152" cy="30" r="4" fill="white" opacity="0.6"/>
+    <circle cx="147" cy="40" r="3" fill="white" opacity="0.4"/>
+    <circle cx="155" cy="48" r="2" fill="white" opacity="0.3"/>
+  </g>
+  
+  <!-- Subtle weave pattern -->
+  <g opacity="0.1" stroke="white" stroke-width="0.5" fill="none">
+    <path d="M60 20 Q90 35 120 20"/>
+    <path d="M60 160 Q90 145 120 160"/>
+  </g>
+</svg>
