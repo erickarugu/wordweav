@@ -198,13 +198,18 @@ export function validateSecurityHeaders(headers: Headers): {
   // Validate origin/referer for CSRF protection
   const allowedOrigins = [
     process.env.NEXTAUTH_URL,
+    process.env.NEXT_PUBLIC_SITE_URL,
     "http://localhost:3000",
-    "https://wordweav.com", // Add your production domain
+    "http://localhost:3001",
+    "https://wordweav.com",
+    "https://www.wordweav.com",
+    "https://wordweav.vercel.app",
   ].filter(Boolean) as string[];
 
   const hasValidOrigin =
     !origin ||
-    allowedOrigins.some((allowed: string) => origin.startsWith(allowed));
+    allowedOrigins.some((allowed: string) => origin.startsWith(allowed)) ||
+    (origin.includes("wordweav") && origin.includes("vercel.app")); // Vercel previews
 
   // Check for suspicious patterns
   const hasSecureHeaders = !!userAgent && userAgent.length > 0;

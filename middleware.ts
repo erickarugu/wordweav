@@ -109,11 +109,28 @@ export function middleware(request: NextRequest) {
       const origin = request.headers.get("origin");
       const allowedOrigins = [
         process.env.NEXTAUTH_URL,
+        process.env.NEXT_PUBLIC_SITE_URL,
         "http://localhost:3000",
-        "https://wordweav.com", // Add your production domain
+        "http://localhost:3001",
+        "https://wordweav.com",
+        "https://www.wordweav.com",
+        "https://wordweav.vercel.app",
       ].filter(Boolean);
 
-      if (origin && allowedOrigins.includes(origin)) {
+      // Log for debugging
+      if (process.env.NODE_ENV === "production") {
+        console.log("CORS check:", { origin, allowedOrigins, pathname });
+      }
+
+      const isAllowed =
+        origin &&
+        (allowedOrigins.includes(origin) ||
+          allowedOrigins.some(
+            (allowed) => allowed && origin.startsWith(allowed)
+          ) ||
+          (origin.includes("wordweav") && origin.includes("vercel.app"))); // Vercel previews
+
+      if (isAllowed) {
         response.headers.set("Access-Control-Allow-Origin", origin);
         response.headers.set("Access-Control-Allow-Credentials", "true");
         response.headers.set(

@@ -292,12 +292,29 @@ export function isAllowedOrigin(origin: string | null): boolean {
 
   const allowedOrigins = [
     process.env.NEXTAUTH_URL,
+    process.env.NEXT_PUBLIC_SITE_URL,
     "http://localhost:3000",
+    "http://localhost:3001", // Alternative dev port
     "https://wordweav.com",
+    "https://www.wordweav.com", // www subdomain
+    "https://wordweav.vercel.app", // Vercel preview URLs
+    "https://wordweav-*.vercel.app", // Vercel branch URLs
     // Add your production domains
   ].filter(Boolean) as string[];
 
-  return allowedOrigins.some((allowed) => origin.startsWith(allowed));
+  // Log for debugging in production
+  if (process.env.NODE_ENV === "production") {
+    console.log("Origin check:", { origin, allowedOrigins });
+  }
+
+  return allowedOrigins.some((allowed) => {
+    // Handle wildcard patterns for Vercel
+    if (allowed.includes("*")) {
+      const pattern = allowed.replace("*", ".*");
+      return new RegExp(`^${pattern}$`).test(origin);
+    }
+    return origin.startsWith(allowed);
+  });
 }
 
 // IP-based blocking (for repeated abuse)
