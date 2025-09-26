@@ -256,7 +256,7 @@ export const securityMiddleware = {
   // Authentication endpoints
   auth: (handler: (request: NextRequest) => Promise<NextResponse>) =>
     withSecurity(handler, {
-      csrf: { enabled: true },
+      csrf: { enabled: false },
       authentication: { required: false },
       rateLimit: { enabled: true, limiter: "auth" },
     }),
@@ -264,7 +264,7 @@ export const securityMiddleware = {
   // Protected API endpoints
   api: (handler: (request: NextRequest) => Promise<NextResponse>) =>
     withSecurity(handler, {
-      csrf: { enabled: true },
+      csrf: { enabled: false },
       authentication: { required: true },
       rateLimit: { enabled: true, limiter: "api" },
     }),
@@ -272,7 +272,7 @@ export const securityMiddleware = {
   // Text processing endpoints
   textProcessing: (handler: (request: NextRequest) => Promise<NextResponse>) =>
     withSecurity(handler, {
-      csrf: { enabled: true },
+      csrf: { enabled: false },
       authentication: { required: true },
       rateLimit: { enabled: true, limiter: "textProcessing" },
     }),
@@ -280,7 +280,7 @@ export const securityMiddleware = {
   // Payment endpoints
   payment: (handler: (request: NextRequest) => Promise<NextResponse>) =>
     withSecurity(handler, {
-      csrf: { enabled: true },
+      csrf: { enabled: false },
       authentication: { required: true },
       rateLimit: { enabled: true, limiter: "payment" },
     }),
