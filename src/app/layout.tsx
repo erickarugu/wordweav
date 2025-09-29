@@ -70,20 +70,21 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {/* Favicon and icons */}
+        {/* Favicon and icons - WordWeav branding */}
         <link
           rel="icon"
           href="/favicon.ico"
-          sizes="16x16"
+          sizes="16x16 32x32"
           type="image/x-icon"
         />
         <link
           rel="icon"
-          href="/favicon-32x32.svg"
+          href="/favicon-32x32.ico"
           sizes="32x32"
           type="image/svg+xml"
         />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"
           href="/apple-touch-icon.png"
