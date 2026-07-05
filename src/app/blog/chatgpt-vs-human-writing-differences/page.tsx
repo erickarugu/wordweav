@@ -429,7 +429,7 @@ export default function ChatGPTVsHumanPost() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-orange-600">
-                      0.5s
+                      10-30s
                     </div>
                     <div className="text-gray-600">Processing Time</div>
                   </div>
