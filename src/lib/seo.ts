@@ -61,11 +61,9 @@ export const SEO_CONFIG = {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "150+",
-    },
+    // No aggregateRating here: Google's structured data guidelines require
+    // review/rating markup to reflect genuine user reviews. Add this back
+    // only once there's a real review system backing it.
   },
 
   // FAQ Schema for common questions
