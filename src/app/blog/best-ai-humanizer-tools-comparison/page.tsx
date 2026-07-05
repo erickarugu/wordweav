@@ -4,93 +4,74 @@ import { generatePageMetadata, generateStructuredData } from "@/lib/seo";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Best AI Humanizer Tools Compared: WordWeave vs Competitors 2025",
+  title: "How to Choose the Best AI Humanizer Tool (2025 Buyer's Guide)",
   description:
-    "Comprehensive comparison of top AI humanization tools including WordWeave, Undetectable AI, and StealthWriter. See which tool delivers the best results.",
+    "A practical guide to evaluating AI text humanizers: what actually matters, what to test yourself before you pay, and how WordWeave approaches each factor.",
   keywords: [
-    "best AI humanizer tools",
+    "best AI humanizer",
     "AI humanizer comparison",
-    "WordWeave vs competitors",
-    "top AI text humanizers",
+    "how to choose an AI humanizer",
+    "AI text humanizer buyer's guide",
     "AI content humanizer review",
-    "undetectable AI tools comparison",
   ],
   path: "/blog/best-ai-humanizer-tools-comparison",
 });
 
-export default function ToolsComparisonPost() {
+const criteria = [
+  {
+    title: "Does it preserve your meaning?",
+    body: "The biggest risk with aggressive humanization tools is that they rewrite so heavily the original facts, argument, or citations drift. Before trusting any tool with real work, run a paragraph through it and check line-by-line that nothing important changed.",
+  },
+  {
+    title: "How does it actually read?",
+    body: "Detection scores matter less than whether a human reader would notice anything off. Read the output out loud. Stiff transitions, repeated sentence structures, and overly uniform paragraph lengths are the tells that most humanizers still struggle with.",
+  },
+  {
+    title: "What's the real word limit and price?",
+    body: "Check the fine print on monthly word caps, not just the headline price. A cheap plan with a tiny word allowance can cost more per word than a pricier plan with a generous limit.",
+  },
+  {
+    title: "Can you control tone and style?",
+    body: "An essay, a marketing blog post, and a business email need different voices. Tools that offer style controls (academic, casual, professional) are more useful than a single one-size-fits-all rewrite.",
+  },
+  {
+    title: "Is there a free trial you can actually test with your own text?",
+    body: "The only reliable way to judge a humanizer is to run your own content through it. Avoid committing to an annual plan before testing with a free trial or a small sample.",
+  },
+  {
+    title: "How fast do you need results?",
+    body: "For one-off documents, processing time barely matters. If you're humanizing content in bulk as part of a workflow, ask about batch processing and typical turnaround time before you commit.",
+  },
+];
+
+const faqs = [
+  {
+    q: "What should I look for in an AI humanizer?",
+    a: "Focus on meaning preservation, natural-sounding output, transparent pricing with a real word limit, style controls, and a free trial you can test with your own text — not just a marketing claim about detection scores.",
+  },
+  {
+    q: "Are 'detection bypass rate' claims from AI humanizer companies reliable?",
+    a: "Treat any specific percentage with caution. Detection tools change frequently, and results vary a lot by content type and length. The most reliable test is running your own sample text through a trial and reading it yourself.",
+  },
+  {
+    q: "Is WordWeave a good fit for academic writing?",
+    a: "WordWeave supports an academic tone setting and is built to preserve citations and factual content, which makes it a reasonable option for essays and research writing — but always follow your institution's policy on AI-assisted writing tools.",
+  },
+  {
+    q: "Do I need a paid plan to try an AI humanizer?",
+    a: "No. WordWeave offers a 7-day free trial with full feature access, so you can test real output on your own writing before paying anything.",
+  },
+];
+
+export default function BuyersGuidePost() {
   const structuredData = generateStructuredData("article", {
-    title: "Best AI Humanizer Tools Compared: WordWeave vs Competitors 2025",
+    title: "How to Choose the Best AI Humanizer Tool (2025 Buyer's Guide)",
     description:
-      "Comprehensive comparison of top AI humanization tools including WordWeave, Undetectable AI, and StealthWriter. See which tool delivers the best results.",
+      "A practical guide to evaluating AI text humanizers: what actually matters, what to test yourself before you pay.",
     publishedAt: "2025-09-08",
     updatedAt: "2025-09-08",
     image: "https://wordweav.com/assets/ai-tools-comparison.jpg",
   });
-
-  const tools = [
-    {
-      name: "WordWeave",
-      score: 9.8,
-      price: "Free / $9.99/mo",
-      pros: [
-        "99.9% success rate",
-        "50+ AI markers analyzed",
-        "0.5s processing",
-        "Preserves meaning",
-        "Real-time updates",
-      ],
-      cons: ["Premium features require subscription"],
-      bestFor: "Professional content creators, students, marketers",
-      detectionBypass: "Excellent",
-      qualityScore: "Outstanding",
-      speedScore: "Instant",
-    },
-    {
-      name: "Undetectable AI",
-      score: 8.5,
-      price: "$14.99/mo",
-      pros: ["Good bypass rate", "Multiple rewrite modes", "Bulk processing"],
-      cons: ["Can alter meaning", "Slower processing", "Limited free version"],
-      bestFor: "Bulk content processing",
-      detectionBypass: "Good",
-      qualityScore: "Good",
-      speedScore: "Moderate",
-    },
-    {
-      name: "StealthWriter",
-      score: 7.9,
-      price: "$12.99/mo",
-      pros: ["Decent quality", "Academic focus", "Multiple languages"],
-      cons: ["Inconsistent results", "High pricing", "Limited customization"],
-      bestFor: "Academic writing",
-      detectionBypass: "Fair",
-      qualityScore: "Good",
-      speedScore: "Slow",
-    },
-    {
-      name: "Humbot",
-      score: 7.2,
-      price: "$9.99/mo",
-      pros: ["Affordable pricing", "Simple interface", "Quick setup"],
-      cons: ["Lower success rate", "Basic features", "Limited support"],
-      bestFor: "Budget-conscious users",
-      detectionBypass: "Fair",
-      qualityScore: "Average",
-      speedScore: "Fast",
-    },
-    {
-      name: "AIHumanizer",
-      score: 6.8,
-      price: "$19.99/mo",
-      pros: ["Enterprise features", "API access", "Team collaboration"],
-      cons: ["Expensive", "Complex setup", "Inconsistent quality"],
-      bestFor: "Large organizations",
-      detectionBypass: "Average",
-      qualityScore: "Average",
-      speedScore: "Moderate",
-    },
-  ];
 
   return (
     <>
@@ -115,331 +96,122 @@ export default function ToolsComparisonPost() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
-              Best AI Humanizer Tools Compared: 2025 Edition
+              How to Choose the Best AI Humanizer Tool
             </h1>
 
             <div className="flex items-center space-x-4 text-gray-600 mb-6">
               <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                Review
+                Guide
               </span>
               <span>September 8, 2025</span>
               <span>•</span>
-              <span>10 min read</span>
+              <span>8 min read</span>
             </div>
 
             <p className="text-xl text-gray-600 leading-relaxed">
-              We tested the top 5 AI humanization tools with 100+ samples across
-              different content types. Here's our comprehensive comparison to
-              help you choose the best tool for your needs.
+              AI humanizer tools all make similar claims — near-perfect
+              detection bypass, instant processing, thousands of happy users.
+              Here's what actually matters when you're evaluating one, and how
+              to test it yourself before you pay for a subscription.
             </p>
           </header>
 
-          {/* Testing Methodology */}
+          {/* Why comparison numbers are hard to trust */}
           <section className="mb-12">
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-orange-200">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                Our Testing Methodology
-              </h2>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
-                    100+
-                  </div>
-                  <div className="text-gray-600">Content Samples</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
-                    5
-                  </div>
-                  <div className="text-gray-600">Detection Tools</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
-                    10
-                  </div>
-                  <div className="text-gray-600">Content Types</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
-                    30
-                  </div>
-                  <div className="text-gray-600">Days Testing</div>
-                </div>
-              </div>
-
-              <div className="mt-6 grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-3">
-                    Detection Tools Tested:
-                  </h3>
-                  <ul className="text-gray-600 space-y-1 text-sm">
-                    <li>• GPTZero</li>
-                    <li>• Originality.ai</li>
-                    <li>• Turnitin</li>
-                    <li>• AI Content Detector</li>
-                    <li>• Copyscape</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-3">
-                    Content Types:
-                  </h3>
-                  <ul className="text-gray-600 space-y-1 text-sm">
-                    <li>• Academic essays</li>
-                    <li>• Blog articles</li>
-                    <li>• Marketing copy</li>
-                    <li>• Technical documentation</li>
-                    <li>• Creative writing</li>
-                  </ul>
-                </div>
-              </div>
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-2xl">
+              <p className="text-amber-900">
+                <strong>A note on comparison numbers:</strong> You'll find a lot
+                of "we tested 5 tools and scored them" articles in this space,
+                often published by the tools themselves. Detection scores
+                shift constantly as detectors update, and results depend
+                heavily on your specific text. Rather than repeat unverifiable
+                scores, this guide focuses on criteria you can check yourself
+                with a free trial.
+              </p>
             </div>
           </section>
 
-          {/* Quick Comparison Table */}
+          {/* Evaluation Criteria */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">
-              Quick Comparison Overview
+              6 Things to Check Before You Pay for a Humanizer
             </h2>
 
-            <div className="overflow-x-auto">
-              <table className="w-full bg-white/60 backdrop-blur-sm rounded-2xl border border-orange-200">
-                <thead className="bg-orange-100">
-                  <tr>
-                    <th className="p-4 text-left font-semibold text-gray-800">
-                      Tool
-                    </th>
-                    <th className="p-4 text-center font-semibold text-gray-800">
-                      Score
-                    </th>
-                    <th className="p-4 text-center font-semibold text-gray-800">
-                      Price
-                    </th>
-                    <th className="p-4 text-center font-semibold text-gray-800">
-                      Detection Bypass
-                    </th>
-                    <th className="p-4 text-center font-semibold text-gray-800">
-                      Quality
-                    </th>
-                    <th className="p-4 text-center font-semibold text-gray-800">
-                      Speed
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tools.map((tool, index) => (
-                    <tr
-                      key={index}
-                      className={index === 0 ? "bg-orange-50" : ""}
-                    >
-                      <td className="p-4 font-semibold text-gray-800">
-                        {tool.name}
-                        {index === 0 && (
-                          <span className="ml-2 text-xs bg-orange-600 text-white px-2 py-1 rounded">
-                            WINNER
-                          </span>
-                        )}
-                      </td>
-                      <td className="p-4 text-center">
-                        <span
-                          className={`font-bold ${index === 0 ? "text-orange-600" : "text-gray-600"}`}
-                        >
-                          {tool.score}/10
-                        </span>
-                      </td>
-                      <td className="p-4 text-center text-gray-600">
-                        {tool.price}
-                      </td>
-                      <td className="p-4 text-center">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-medium ${
-                            tool.detectionBypass === "Excellent"
-                              ? "bg-green-100 text-green-800"
-                              : tool.detectionBypass === "Good"
-                                ? "bg-blue-100 text-blue-800"
-                                : tool.detectionBypass === "Fair"
-                                  ? "bg-yellow-100 text-yellow-800"
-                                  : "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {tool.detectionBypass}
-                        </span>
-                      </td>
-                      <td className="p-4 text-center">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-medium ${
-                            tool.qualityScore === "Outstanding"
-                              ? "bg-green-100 text-green-800"
-                              : tool.qualityScore === "Good"
-                                ? "bg-blue-100 text-blue-800"
-                                : "bg-gray-100 text-gray-800"
-                          }`}
-                        >
-                          {tool.qualityScore}
-                        </span>
-                      </td>
-                      <td className="p-4 text-center">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-medium ${
-                            tool.speedScore === "Instant"
-                              ? "bg-green-100 text-green-800"
-                              : tool.speedScore === "Fast"
-                                ? "bg-blue-100 text-blue-800"
-                                : tool.speedScore === "Moderate"
-                                  ? "bg-yellow-100 text-yellow-800"
-                                  : "bg-red-100 text-red-800"
-                          }`}
-                        >
-                          {tool.speedScore}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* Detailed Reviews */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-8">
-              Detailed Tool Reviews
-            </h2>
-
-            <div className="space-y-8">
-              {tools.map((tool, index) => (
+            <div className="space-y-6">
+              {criteria.map((item, i) => (
                 <div
-                  key={index}
-                  className={`rounded-2xl p-8 border-2 ${
-                    index === 0
-                      ? "bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300"
-                      : "bg-white/60 backdrop-blur-sm border-orange-200"
-                  }`}
+                  key={item.title}
+                  className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-orange-200"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center">
-                      <span
-                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 ${
-                          index === 0
-                            ? "bg-orange-600 text-white"
-                            : "bg-gray-200 text-gray-600"
-                        }`}
-                      >
-                        {index + 1}
-                      </span>
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-800">
-                          {tool.name}
-                        </h3>
-                        <div className="flex items-center space-x-4 mt-1">
-                          <span className="text-lg font-semibold text-orange-600">
-                            {tool.score}/10
-                          </span>
-                          <span className="text-gray-600">{tool.price}</span>
-                          {index === 0 && (
-                            <span className="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                              Best Overall
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {index === 0 && (
-                      <Link
-                        href="/"
-                        className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors"
-                      >
-                        Try Free
-                      </Link>
-                    )}
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div className="flex items-start">
+                    <span className="w-8 h-8 flex-shrink-0 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4">
+                      {i + 1}
+                    </span>
                     <div>
-                      <h4 className="font-semibold text-green-600 mb-3">
-                        ✓ Pros:
-                      </h4>
-                      <ul className="space-y-2">
-                        {tool.pros.map((pro, proIndex) => (
-                          <li key={proIndex} className="text-gray-600 text-sm">
-                            • {pro}
-                          </li>
-                        ))}
-                      </ul>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600">{item.body}</p>
                     </div>
-
-                    <div>
-                      <h4 className="font-semibold text-red-600 mb-3">
-                        ✗ Cons:
-                      </h4>
-                      <ul className="space-y-2">
-                        {tool.cons.map((con, conIndex) => (
-                          <li key={conIndex} className="text-gray-600 text-sm">
-                            • {con}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="bg-white/60 rounded-xl p-4">
-                    <p className="text-gray-700">
-                      <strong>Best For:</strong> {tool.bestFor}
-                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Why WordWeave Wins */}
+          {/* How WordWeave approaches this */}
           <section className="mb-12">
             <div className="bg-gradient-to-r from-orange-600 to-amber-600 rounded-3xl p-8 text-white">
               <h2 className="text-3xl font-bold mb-6">
-                Why WordWeave Leads the Market
+                How WordWeave Approaches Each Factor
               </h2>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <div className="bg-white/20 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-3">
-                    Advanced AI Analysis
-                  </h3>
-                  <p className="opacity-90">
-                    Analyzes 50+ unique AI writing markers that other tools
-                    miss, ensuring comprehensive humanization.
-                  </p>
-                </div>
-
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-white/20 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-3">
                     Meaning Preservation
                   </h3>
                   <p className="opacity-90">
-                    Unlike competitors, WordWeave maintains your original
-                    message while making it undetectable.
+                    WordWeave rewrites sentence structure and word choice
+                    without altering your facts, arguments, or citations.
                   </p>
                 </div>
-
                 <div className="bg-white/20 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-3">
-                    Real-time Updates
+                    Style Controls
                   </h3>
                   <p className="opacity-90">
-                    Continuously updated to stay ahead of new AI detection
-                    methods and algorithms.
+                    Choose between academic, professional, and casual tones
+                    depending on what you're writing.
+                  </p>
+                </div>
+                <div className="bg-white/20 rounded-xl p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    Transparent Pricing
+                  </h3>
+                  <p className="opacity-90">
+                    One plan, 15,000 words per month, clearly stated up front
+                    — see our{" "}
+                    <Link href="/pricing" className="underline">
+                      pricing page
+                    </Link>{" "}
+                    for details.
+                  </p>
+                </div>
+                <div className="bg-white/20 rounded-xl p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    Try Before You Pay
+                  </h3>
+                  <p className="opacity-90">
+                    A 7-day free trial with full feature access, so you can
+                    test it on your own writing first.
                   </p>
                 </div>
               </div>
 
               <div className="text-center">
-                <p className="text-xl mb-6 opacity-90">
-                  Join 10,000+ users who trust WordWeave for their AI
-                  humanization needs.
-                </p>
                 <Link
-                  href="/"
+                  href="/auth/signup"
                   className="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors inline-block"
                 >
                   Start Free Trial →
@@ -448,238 +220,83 @@ export default function ToolsComparisonPost() {
             </div>
           </section>
 
-          {/* Detailed Feature Comparison */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-8">
-              Feature-by-Feature Comparison
-            </h2>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-orange-200">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Detection Bypass Rate
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">WordWeave</span>
-                    <div className="flex items-center">
-                      <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
-                        <div
-                          className="bg-green-500 h-2 rounded-full"
-                          style={{ width: "99%" }}
-                        ></div>
-                      </div>
-                      <span className="text-sm font-medium">99%</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Undetectable AI</span>
-                    <div className="flex items-center">
-                      <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
-                        <div
-                          className="bg-blue-500 h-2 rounded-full"
-                          style={{ width: "85%" }}
-                        ></div>
-                      </div>
-                      <span className="text-sm font-medium">85%</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">StealthWriter</span>
-                    <div className="flex items-center">
-                      <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
-                        <div
-                          className="bg-yellow-500 h-2 rounded-full"
-                          style={{ width: "79%" }}
-                        ></div>
-                      </div>
-                      <span className="text-sm font-medium">79%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-orange-200">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Processing Speed
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">WordWeave</span>
-                    <span className="text-sm font-bold text-green-600">
-                      0.5s
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Humbot</span>
-                    <span className="text-sm font-medium text-blue-600">
-                      2.1s
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Undetectable AI</span>
-                    <span className="text-sm font-medium text-yellow-600">
-                      3.8s
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">StealthWriter</span>
-                    <span className="text-sm font-medium text-red-600">
-                      5.2s
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-orange-200">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Value for Money
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">WordWeave</span>
-                    <span className="text-sm font-bold text-green-600">
-                      Excellent
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Humbot</span>
-                    <span className="text-sm font-medium text-blue-600">
-                      Good
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Undetectable AI</span>
-                    <span className="text-sm font-medium text-yellow-600">
-                      Fair
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">AIHumanizer</span>
-                    <span className="text-sm font-medium text-red-600">
-                      Poor
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* Use Case Recommendations */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">
-              Best Tool for Your Use Case
+              Matching a Humanizer to Your Use Case
             </h2>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
                   Students & Academic Writing
                 </h3>
-                <div className="mb-4">
-                  <span className="text-2xl font-bold text-green-600">
-                    WordWeave
-                  </span>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Best for essays, research papers, and academic content
-                  </p>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Passes Turnitin detection</li>
-                  <li>• Maintains academic tone</li>
-                  <li>• Preserves citations</li>
-                  <li>• Affordable for students</li>
-                </ul>
+                <p className="text-sm text-gray-600">
+                  Prioritize a tool with an academic tone setting and citation
+                  preservation. Always confirm your institution allows
+                  AI-assisted writing tools before submitting anything.
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
                   Content Marketers
                 </h3>
-                <div className="mb-4">
-                  <span className="text-2xl font-bold text-blue-600">
-                    WordWeave
-                  </span>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Perfect for blog posts, marketing copy, and SEO content
-                  </p>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• SEO-friendly output</li>
-                  <li>• Brand voice preservation</li>
-                  <li>• Bulk processing</li>
-                  <li>• Fast turnaround</li>
-                </ul>
+                <p className="text-sm text-gray-600">
+                  Look for consistent brand-voice output and a word allowance
+                  that matches your publishing volume.
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-6 border border-purple-200">
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                  Enterprise Teams
+                  Business Professionals
                 </h3>
-                <div className="mb-4">
-                  <span className="text-2xl font-bold text-purple-600">
-                    WordWeave Pro
-                  </span>
-                  <p className="text-sm text-gray-600 mt-1">
-                    Scalable solution for large organizations
-                  </p>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Team collaboration</li>
-                  <li>• API integration</li>
-                  <li>• Custom workflows</li>
-                  <li>• Priority support</li>
-                </ul>
+                <p className="text-sm text-gray-600">
+                  A professional tone setting and fast turnaround matter most
+                  for emails, reports, and proposals.
+                </p>
               </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-6">
+              {faqs.map((item) => (
+                <details
+                  key={item.q}
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-orange-200"
+                >
+                  <summary className="text-lg font-semibold text-gray-800 cursor-pointer">
+                    {item.q}
+                  </summary>
+                  <p className="mt-4 text-gray-600">{item.a}</p>
+                </details>
+              ))}
             </div>
           </section>
 
           {/* Final Verdict */}
           <section className="mb-12">
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-orange-200">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Final Verdict
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-orange-200 text-center">
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                The Best Way to Decide
               </h2>
-
-              <p className="text-lg text-gray-600 mb-6">
-                After extensive testing across multiple content types and
-                detection tools, <strong>WordWeave</strong> emerges as the clear
-                winner. It consistently delivers the highest bypass rates while
-                maintaining content quality and meaning.
+              <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+                Skip the marketing claims and run a real paragraph of your own
+                writing through a free trial. That's the only test that tells
+                you how a tool will actually perform on your content.
               </p>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-600 mb-2">
-                    🏆
-                  </div>
-                  <h3 className="font-semibold text-gray-800">Best Overall</h3>
-                  <p className="text-gray-600">WordWeave</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-600 mb-2">
-                    💰
-                  </div>
-                  <h3 className="font-semibold text-gray-800">Best Value</h3>
-                  <p className="text-gray-600">WordWeave</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-orange-600 mb-2">
-                    ⚡
-                  </div>
-                  <h3 className="font-semibold text-gray-800">Fastest</h3>
-                  <p className="text-gray-600">WordWeave</p>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <Link
-                  href="/"
-                  className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-orange-700 transition-colors inline-block"
-                >
-                  Try WordWeave Free Today →
-                </Link>
-              </div>
+              <Link
+                href="/auth/signup"
+                className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-orange-700 transition-colors inline-block"
+              >
+                Try WordWeave Free →
+              </Link>
             </div>
           </section>
 

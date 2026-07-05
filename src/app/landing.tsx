@@ -234,7 +234,7 @@ function LandingPageContent() {
             <div className="max-w-6xl mx-auto text-center">
               {/* Creative WordWeave Animation */}
               <div className="mb-8 relative">
-                <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 relative">
+                <div className="text-7xl md:text-8xl lg:text-9xl font-black mb-6 relative">
                   <div className="flex items-center justify-center">
                     {/* Word with sparkle effect */}
                     <span className="relative">
@@ -302,7 +302,7 @@ function LandingPageContent() {
                     className="absolute -bottom-8 right-1/4 w-20 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent animate-pulse"
                     style={{ animationDelay: "1s" }}
                   ></div>
-                </h1>
+                </div>
 
                 {/* User Count Badge */}
                 <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-orange-200 shadow-lg mb-6">
@@ -315,8 +315,8 @@ function LandingPageContent() {
 
               {/* SEO-Optimized Subtitle - Professional Writing Enhancement */}
               <div className="mb-12 max-w-4xl mx-auto">
-                <h2 className="text-2xl md:text-3xl text-gray-700 font-light leading-relaxed mb-6">
-                  Transform{" "}
+                <h1 className="text-2xl md:text-3xl text-gray-700 font-light leading-relaxed mb-6">
+                  AI Text Humanizer: Transform{" "}
                   <span className="font-semibold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
                     robotic AI text
                   </span>{" "}
@@ -325,11 +325,12 @@ function LandingPageContent() {
                     natural, professional content
                   </span>{" "}
                   that engages your audience
-                </h2>
+                </h1>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Enhance your AI-assisted writing with our professional text refinement tool. 
-                  Perfect for content creators, marketers, and professionals who want to improve 
-                  readability, tone, and engagement in their AI-assisted drafts.
+                  Enhance your AI-assisted writing with our professional text
+                  refinement tool. Perfect for content creators, marketers, and
+                  professionals who want to improve readability, tone, and
+                  engagement in their AI-assisted drafts.
                 </p>
 
                 {/* Before/After Example */}
@@ -768,7 +769,7 @@ function LandingPageContent() {
                   <div className="grid md:grid-cols-2 gap-4 text-left">
                     <div className="flex items-center">
                       <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
-                      <span>Unlimited text humanization</span>
+                      <span>15,000 words/month included</span>
                     </div>
                     <div className="flex items-center">
                       <div className="w-2 h-2 bg-white rounded-full mr-3"></div>
@@ -851,17 +852,17 @@ function LandingPageContent() {
                 <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-orange-200 hover:shadow-lg transition-shadow">
                   <div className="text-3xl mb-4">⚖️</div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                    Tool Comparison
+                    Buyer&apos;s Guide
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    See how WordWeave compares to other AI humanizers in our
-                    detailed review.
+                    Learn what actually matters when choosing an AI humanizer
+                    tool.
                   </p>
                   <Link
                     href="/blog/best-ai-humanizer-tools-comparison"
                     className="text-orange-600 hover:text-orange-700 font-medium"
                   >
-                    See Comparison →
+                    Read the Guide →
                   </Link>
                 </div>
               </div>
@@ -902,6 +903,14 @@ function LandingPageContent() {
                     </li>
                     <li>
                       <Link
+                        href="/features"
+                        className="hover:text-orange-400 transition-colors"
+                      >
+                        Features
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         href="/how-it-works"
                         className="hover:text-orange-400 transition-colors"
                       >
@@ -910,10 +919,10 @@ function LandingPageContent() {
                     </li>
                     <li>
                       <Link
-                        href="/dashboard"
+                        href="/pricing"
                         className="hover:text-orange-400 transition-colors"
                       >
-                        Dashboard
+                        Pricing
                       </Link>
                     </li>
                   </ul>

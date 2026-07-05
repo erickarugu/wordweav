@@ -109,9 +109,9 @@ export function generatePageMetadata({
   image?: string;
   noIndex?: boolean;
 }) {
-  const fullTitle = title
-    ? `${title} | ${SEO_CONFIG.siteName} - AI Text Humanizer`
-    : SEO_CONFIG.defaultTitle;
+  // Every call site already supplies a full, brand-inclusive title, so use
+  // it as-is instead of appending the brand template a second time.
+  const fullTitle = title || SEO_CONFIG.defaultTitle;
 
   const fullDescription = description || SEO_CONFIG.defaultDescription;
   const fullUrl = `${SEO_CONFIG.siteUrl}${path}`;

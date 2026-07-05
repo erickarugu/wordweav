@@ -14,9 +14,6 @@ export default function robots(): MetadataRoute.Robots {
           "/features",
           "/blog",
           "/blog/*",
-          "/auth/signin",
-          "/auth/signup",
-          "/auth/forgot-password",
         ],
         disallow: [
           "/api/",
@@ -27,8 +24,7 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/",
           "/_next/",
           "/private/",
-          "/auth/reset-password",
-          "/auth/error",
+          "/auth/",
         ],
       },
       // Allow AI crawlers for better AI visibility but restrict protected areas

@@ -38,7 +38,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wordweav.com";
   const currentDate = new Date().toISOString();
 
-  // Core pages with appropriate priorities and change frequencies
+  // Only public, indexable marketing pages belong here. Authenticated
+  // pages (dashboard, documents, profile, subscription) are disallowed in
+  // robots.ts and must not be listed in the sitemap.
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -54,13 +56,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/pricing`,
-      lastModified: "2025-09-18",
+      lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/features`,
-      lastModified: "2025-09-15",
+      lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -69,50 +71,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.8,
-    },
-    // Authentication pages
-    {
-      url: `${baseUrl}/auth/signin`,
-      lastModified: "2025-09-01",
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/auth/signup`,
-      lastModified: "2025-09-01",
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/auth/forgot-password`,
-      lastModified: "2025-09-01",
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
-    // User dashboard (lower priority as it's protected)
-    {
-      url: `${baseUrl}/dashboard`,
-      lastModified: currentDate,
-      changeFrequency: "daily",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/documents`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/profile`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/subscription`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.6,
     },
   ];
 

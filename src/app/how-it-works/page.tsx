@@ -174,7 +174,7 @@ export default function HowItWorks() {
                 </summary>
                 <div className="mt-4 text-gray-600">
                   <p>
-                    Our AI humanizer achieves 95%+ accuracy in making AI content
+                    Our AI humanizer achieves 99.9% accuracy in making AI content
                     appear human-written. The process maintains original meaning
                     while completely transforming the writing style and
                     structure.

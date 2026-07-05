@@ -88,7 +88,7 @@ export default function BypassDetectionPost() {
           {/* Quick Stats */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-orange-200 text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-2">95%</div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">99.9%</div>
               <div className="text-gray-600">Success Rate</div>
             </div>
             <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-orange-200 text-center">
@@ -450,7 +450,7 @@ export default function BypassDetectionPost() {
                       <li>• Analyzes 50+ AI detection markers</li>
                       <li>• 99.9% success rate against major detectors</li>
                       <li>• Preserves original meaning and context</li>
-                      <li>• Works in under 0.5 seconds</li>
+                      <li>• Processes text in 10-30 seconds</li>
                       <li>• Continuously updated for new detection methods</li>
                     </ul>
 
@@ -494,7 +494,7 @@ export default function BypassDetectionPost() {
                     Success Metrics:
                   </h3>
                   <ul className="text-gray-600 space-y-2">
-                    <li>• &lt;95% AI probability</li>
+                    <li>• &lt;5% AI probability</li>
                     <li>• Human-like confidence score</li>
                     <li>• Natural readability</li>
                     <li>• Preserved meaning</li>

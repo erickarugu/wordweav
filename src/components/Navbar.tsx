@@ -28,16 +28,28 @@ export default function Navbar() {
         {/* Center Navigation Links */}
         <div className="hidden sm:flex items-center gap-8 flex-1 justify-center">
           <Link
-            href="/blog"
+            href="/features"
             className="text-orange-700 font-medium hover:text-orange-800 transition-colors"
           >
-            Blog
+            Features
           </Link>
           <Link
             href="/how-it-works"
             className="text-orange-700 font-medium hover:text-orange-800 transition-colors"
           >
             How It Works
+          </Link>
+          <Link
+            href="/pricing"
+            className="text-orange-700 font-medium hover:text-orange-800 transition-colors"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/blog"
+            className="text-orange-700 font-medium hover:text-orange-800 transition-colors"
+          >
+            Blog
           </Link>
         </div>
 
@@ -169,11 +181,11 @@ export default function Navbar() {
         <div className="sm:hidden absolute top-full left-0 right-0 bg-white border-t border-orange-200 shadow-lg z-50">
           <div className="p-4 space-y-4">
             <Link
-              href="/blog"
+              href="/features"
               className="block text-orange-700 font-medium hover:text-orange-800 transition-colors"
               onClick={() => setShowMobileMenu(false)}
             >
-              Blog
+              Features
             </Link>
             <Link
               href="/how-it-works"
@@ -181,6 +193,20 @@ export default function Navbar() {
               onClick={() => setShowMobileMenu(false)}
             >
               How It Works
+            </Link>
+            <Link
+              href="/pricing"
+              className="block text-orange-700 font-medium hover:text-orange-800 transition-colors"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/blog"
+              className="block text-orange-700 font-medium hover:text-orange-800 transition-colors"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              Blog
             </Link>
 
             {session ? (
